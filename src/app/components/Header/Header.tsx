@@ -126,7 +126,7 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
           <div className="hidden lg:block">
             <a 
               href="tel:0862669588" 
-              className="btn btn-primary"
+              className="btn btn-primary bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg"
             >
               Hotline: 086.266.9588
             </a>

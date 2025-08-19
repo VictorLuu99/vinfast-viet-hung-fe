@@ -11,19 +11,19 @@ interface ProductCardProps {
 
 const getBadgeStyles = (badge: string): string => {
   if (badge.includes('Cao cấp')) {
-    return 'bg-premium text-white'
+    return 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white'
   } else if (badge.includes('Trung cấp')) {
-    return 'bg-performance text-white'
+    return 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white'
   } else if (badge.includes('Thông minh')) {
-    return 'bg-smart text-white'
+    return 'bg-gradient-to-r from-green-600 to-emerald-600 text-white'
   } else if (badge.includes('Bán chạy')) {
-    return 'bg-popular text-white'
+    return 'bg-gradient-to-r from-orange-600 to-red-600 text-white'
   } else if (badge.includes('Kinh tế')) {
-    return 'bg-budget text-white'
+    return 'bg-gradient-to-r from-teal-600 to-blue-600 text-white'
   } else if (badge.includes('Học sinh')) {
-    return 'bg-entry text-white'
+    return 'bg-gradient-to-r from-pink-600 to-purple-600 text-white'
   }
-  return 'bg-gray-600 text-white'
+  return 'bg-gradient-to-r from-gray-600 to-gray-700 text-white'
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, className = '' }) => {
@@ -33,7 +33,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, className = '' }) =>
       data-category={product.category}
     >
       {/* Badge */}
-      <div className={`absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-xs font-medium ${getBadgeStyles(product.badge)}`}>
+      <div className={`absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide shadow-lg ${getBadgeStyles(product.badge)}`}>
         {product.badge}
       </div>
 

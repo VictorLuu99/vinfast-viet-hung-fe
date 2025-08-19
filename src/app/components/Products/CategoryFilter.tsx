@@ -21,10 +21,10 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
         <button
           key={category.id}
           onClick={() => onCategoryChange(category.id)}
-          className={`px-4 py-2 md:px-6 md:py-3 rounded-lg font-medium text-sm md:text-base transition-all duration-300 ${
+          className={`px-4 py-2 md:px-6 md:py-3 rounded-full font-medium text-sm md:text-base transition-all duration-300 ${
             activeCategory === category.id
-              ? 'bg-primary-blue text-white shadow-lg transform scale-105'
-              : 'bg-white text-text-dark border border-gray-300 hover:border-primary-blue hover:text-primary-blue hover:bg-primary-blue/5'
+              ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg transform scale-105'
+              : 'bg-gray-200 text-gray-700 hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-500 hover:text-white hover:shadow-md'
           }`}
         >
           {category.displayName} ({category.count})

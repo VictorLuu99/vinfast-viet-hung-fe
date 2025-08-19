@@ -36,10 +36,10 @@ const ProductsSection: React.FC = () => {
           />
           
           {/* Price Range */}
-          <div className="flex items-center justify-center space-x-4 text-lg font-semibold text-primary-blue">
-            <span>Từ 12.000.000đ</span>
+          <div className="flex items-center justify-center space-x-4 text-lg font-bold">
+            <span className="text-accent-pink">Từ 12.000.000đ</span>
             <span className="text-text-light">-</span>
-            <span>40.000.000đ</span>
+            <span className="text-primary-blue">40.000.000đ</span>
           </div>
         </div>
 

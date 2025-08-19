@@ -182,7 +182,7 @@ a:hover {
 
 @keyframes slideUp {
   from { 
-    transform: translateY(20px); 
+    transform: translateY(30px); 
     opacity: 0; 
   }
   to { 
@@ -200,6 +200,67 @@ a:hover {
     transform: scale(1); 
     opacity: 1; 
   }
+}
+
+@keyframes filterIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Product Card Hover Effects */
+.product-card {
+  transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Enhanced Button Styles */
+.btn {
+  transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-pink);
+  transform: translateY(-2px);
+}
+
+.btn-outline:hover {
+  transform: translateY(-2px);
 }
 
 .animate-fade-in {
