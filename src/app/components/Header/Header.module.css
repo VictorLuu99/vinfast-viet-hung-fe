@@ -1,0 +1,167 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: 0.3s ease;
+}
+
+.header.scrolled {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.navBrand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navLogo {
+  height: 40px;
+  width: auto;
+}
+
+.brandText h1 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #333333;
+  margin: 0;
+}
+
+.brandText p {
+  font-size: 0.875rem;
+  color: #666666;
+  margin: 0;
+}
+
+.navMenu {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navList {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navLink {
+  color: #333333;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.15s ease;
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.navLink:hover,
+.navLink.active {
+  color: #1d5b9f;
+}
+
+.navLink.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #1d5b9f;
+}
+
+.navCta {
+  display: flex;
+  align-items: center;
+}
+
+.navToggle {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+}
+
+.navToggle span {
+  width: 24px;
+  height: 2px;
+  background-color: #333333;
+  transition: 0.15s ease;
+}
+
+.navToggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.navToggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.navToggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Mobile menu styles */
+@media (max-width: 768px) {
+  .navMenu {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 60px);
+    background-color: #ffffff;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 2rem;
+    transform: translateX(-100%);
+    transition: 0.3s ease;
+  }
+
+  .navMenu.active {
+    transform: translateX(0);
+  }
+
+  .navList {
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  .navLink {
+    font-size: 1.125rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e9ecef;
+    width: 100%;
+    text-align: left;
+  }
+
+  .navToggle {
+    display: flex;
+  }
+
+  .navCta {
+    display: none;
+  }
+}
