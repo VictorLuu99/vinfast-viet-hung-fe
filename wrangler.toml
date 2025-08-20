@@ -1,0 +1,10 @@
+name = "vinfast-viethung-nextjs"
+compatibility_date = "2024-08-19"
+
+[env.production]
+name = "vinfast-viethung-nextjs"
+
+[[env.production.build]]
+command = "npm run build"
+cwd = ""
+watch_dir = "src"
