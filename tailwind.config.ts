@@ -7,6 +7,14 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    screens: {
+      'xs': '475px',
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+    },
     extend: {
       colors: {
         primary: {
@@ -55,6 +63,12 @@ const config: Config = {
         '2xl': '3rem',
         '3xl': '4rem',
         '4xl': '6rem',
+        '5xl': '8rem',
+        '6xl': '10rem',
+      },
+      aspectRatio: {
+        'product': '4/3',
+        'hero': '16/10',
       },
       maxWidth: {
         'container': '1200px',

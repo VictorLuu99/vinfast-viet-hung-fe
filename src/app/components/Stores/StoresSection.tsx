@@ -4,24 +4,23 @@ import { MapPin, Building2, Users, Star } from 'lucide-react';
 
 export const StoresSection = () => {
   return (
-    <section id="stores" className="py-20 sm:py-24 lg:py-32 bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 text-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="stores" className="py-16 sm:py-20 md:py-24 lg:py-28 xl:py-32 bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 text-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-blue-500/20 text-blue-300 px-4 py-2 rounded-full text-sm font-medium mb-6 border border-blue-400/30">
-            <Building2 className="w-4 h-4" />
+        <div className="text-center mb-12 sm:mb-16">
+          <div className="inline-flex items-center gap-2 bg-blue-500/20 text-blue-300 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6 border border-blue-400/30">
+            <Building2 className="w-3 h-3 sm:w-4 sm:h-4" />
             Hệ thống cửa hàng
           </div>
           
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-            Hệ thống cửa hàng
-            <br />
-            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6">
+            <span className="block">Hệ thống cửa hàng</span>
+            <span className="block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               VinFast Việt Hùng
             </span>
           </h2>
           
-          <p className="text-lg sm:text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 sm:mb-8 max-w-2xl md:max-w-3xl mx-auto leading-relaxed">
             4 cơ sở phục vụ tại Vĩnh Phúc và Phú Thọ - Luôn sẵn sàng hỗ trợ bạn 
             với đội ngũ chuyên nghiệp và dịch vụ chất lượng cao.
           </p>
@@ -60,7 +59,7 @@ export const StoresSection = () => {
         </div>
 
         {/* Stores Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {stores.map((store) => (
             <StoreCard key={store.id} store={store} />
           ))}
