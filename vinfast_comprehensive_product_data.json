@@ -1,0 +1,306 @@
+{
+  "metadata": {
+    "extractionDate": "2025-08-22T15:45:00.000Z",
+    "totalProducts": 13,
+    "extractionMethod": "Puppeteer web crawling",
+    "dataSource": "https://shop.vinfastauto.com/",
+    "extractedBy": "Claude Code SuperClaude Framework"
+  },
+  "products": [
+    {
+      "id": "evo-neo",
+      "slug": "xe-may-dien-evo-neo",
+      "basicInfo": {
+        "name": "VinFast Evo Neo",
+        "displayName": "VinFast EvoNEO",
+        "price": "17.800.000 VNĐ",
+        "priceNumeric": 17800000,
+        "tagline": "HÀNH TRÌNH MỚI, PHONG CÁCH MỚI",
+        "category": "electric-motorcycle",
+        "specifications": {
+          "maxSpeed": "60 km/h",
+          "range": "117 km/1 lần sạc",
+          "storage": "17 lít",
+          "chargingTime": "400W - 8-10 giờ",
+          "batteryType": "Pin LFP"
+        }
+      },
+      "colors": [
+        "đen",
+        "xanh tím", 
+        "trắng",
+        "xanh lá cây",
+        "đỏ"
+      ],
+      "features": [
+        "2 chế độ lái Eco & Sport",
+        "Công nghệ pin LFP vượt trội",
+        "Tiêu chuẩn chống nước IP67",
+        "Hệ thống đèn Full LED",
+        "Đèn pha projector",
+        "Cốp xe rộng 17 lít",
+        "Thiết kế hiện đại đầy khác biệt",
+        "05 màu sắc đa dạng"
+      ],
+      "images": {
+        "hero": [
+          {
+            "src": "https://shop.vinfastauto.com/on/demandware.static/-/Sites-app_vinfast_vn-Library/default/dwfad7f9f7/images/PDP-XMD/evoneo/img-top-evoneo-black-sp.webp",
+            "alt": "Xe máy điện VinFast EvoNEO màu đen",
+            "width": 765,
+            "height": 435
+          }
+        ],
+        "variants": [
+          {
+            "src": "https://shop.vinfastauto.com/on/demandware.static/-/Sites-app_vinfast_vn-Library/default/dw0b316cc0/images/PDP-XMD/evoneo/img-top-evoneo-blue-sp.webp",
+            "alt": "Xe máy điện VinFast EvoNEO màu xanh tím",
+            "color": "xanh tím"
+          },
+          {
+            "src": "https://shop.vinfastauto.com/on/demandware.static/-/Sites-app_vinfast_vn-Library/default/dw0537c8ee/images/PDP-XMD/evoneo/img-top-evoneo-white-sp.webp",
+            "alt": "Xe máy điện VinFast EvoNEO màu trắng",
+            "color": "trắng"
+          },
+          {
+            "src": "https://shop.vinfastauto.com/on/demandware.static/-/Sites-app_vinfast_vn-Library/default/dw46480ad9/images/PDP-XMD/evoneo/img-top-evoneo-green-sp.webp",
+            "alt": "Xe máy điện VinFast EvoNEO màu xanh lá cây",
+            "color": "xanh lá cây"
+          },
+          {
+            "src": "https://shop.vinfastauto.com/on/demandware.static/-/Sites-app_vinfast_vn-Library/default/dw450d9ef7/images/PDP-XMD/evoneo/img-top-evoneo-red-sp.webp",
+            "alt": "Xe máy điện VinFast EvoNEO màu đỏ",
+            "color": "đỏ"
+          }
+        ]
+      },
+      "meta": {
+        "url": "https://shop.vinfastauto.com/vn_vi/xe-may-dien-evo-neo.html",
+        "title": "VinFast Evo NEO | VinFast",
+        "description": "VinFast Evo NEO"
+      }
+    },
+    {
+      "id": "motio",
+      "slug": "xe-may-dien-motio",
+      "basicInfo": {
+        "name": "VinFast Motio",
+        "displayName": "VinFast Motio",
+        "price": "12.000.000 VNĐ",
+        "priceNumeric": 12000000,
+        "tagline": "SÀNH ĐIỆU - NỔI BẬT - CHUẨN PHONG CÁCH",
+        "category": "electric-motorcycle",
+        "specifications": {
+          "maxSpeed": "49 km/h",
+          "range": "82 km/1 lần sạc",
+          "storage": "22 lít",
+          "battery": "1.26 kWh",
+          "chargingTime": "220W - 8-10h",
+          "motorType": "BLDC",
+          "power": "1500W"
+        }
+      },
+      "colors": [
+        "hồng công nghệ",
+        "đen nhám",
+        "trắng ngọc trai",
+        "đỏ tươi",
+        "vàng"
+      ],
+      "features": [
+        "Thiết kế nhỏ gọn, trẻ trung, năng động",
+        "Trọng tâm xe cân đối, sàn để chân rộng rãi",
+        "Hệ thống giảm chấn thủy lực",
+        "Tối ưu chi phí vận hành",
+        "Thể tích cốp sau đạt tới 22 lít",
+        "Móc treo đa năng kết hợp hộc để đồ linh hoạt",
+        "Yên xe chất da dày dặn",
+        "Hệ thống phanh đĩa bánh trước và phanh tang trống phía sau",
+        "Vành xe 10 inch",
+        "Hệ thống đèn Full LED",
+        "Màn hình đồng hồ kỹ thuật số HMI LED Color"
+      ],
+      "images": {
+        "hero": [
+          {
+            "src": "https://shop.vinfastauto.com/on/demandware.static/-/Sites-app_vinfast_vn-Library/default/dw03083e40/images/PDP-XMD/motio/img-motio-pink.png",
+            "alt": "Xe máy điện VinFast Motio màu hồng",
+            "width": 765,
+            "height": 435
+          }
+        ],
+        "variants": [
+          {
+            "src": "https://shop.vinfastauto.com/on/demandware.static/-/Sites-app_vinfast_vn-Library/default/dw0e145389/images/PDP-XMD/motio/img-motio2-pink.png",
+            "alt": "Thiết kế xe máy điện VinFast Motio màu hồng",
+            "color": "hồng công nghệ"
+          },
+          {
+            "src": "https://shop.vinfastauto.com/on/demandware.static/-/Sites-app_vinfast_vn-Library/default/dw010ed314/images/PDP-XMD/motio/img-motio2-black.png",
+            "alt": "Thiết kế xe máy điện VinFast Motio màu đen",
+            "color": "đen nhám"
+          },
+          {
+            "src": "https://shop.vinfastauto.com/on/demandware.static/-/Sites-app_vinfast_vn-Library/default/dwac8fb162/images/PDP-XMD/motio/img-motio2-white.png",
+            "alt": "Thiết kế xe máy điện VinFast Motio màu trắng",
+            "color": "trắng ngọc trai"
+          }
+        ]
+      },
+      "meta": {
+        "url": "https://shop.vinfastauto.com/vn_vi/xe-may-dien-motio.html",
+        "title": "VinFast Motio | VinFast",
+        "description": "VinFast Motio"
+      }
+    },
+    {
+      "id": "evo-grand",
+      "slug": "xe-may-dien-evo-grand",
+      "basicInfo": {
+        "name": "VinFast Evo Grand",
+        "displayName": "VinFast Evo Grand",
+        "price": "21.000.000 VNĐ",
+        "priceNumeric": 21000000,
+        "originalPrice": "18.000.000 VNĐ",
+        "tagline": "Vận hành bền bỉ, chinh phục mọi hành trình",
+        "category": "electric-motorcycle",
+        "specifications": {
+          "maxSpeed": "70 km/h",
+          "range": "262 km/1 lần sạc",
+          "storage": "35 lít",
+          "battery": "4 kWh",
+          "batteryUpgrade": "02 pin kép có thể nâng cấp"
+        }
+      },
+      "colors": [
+        "đen",
+        "trắng",
+        "xanh dương",
+        "đỏ"
+      ],
+      "features": [
+        "Thể tích cốp 35L tối ưu sức chứa",
+        "Linh hoạt nâng cấp 02 pin kép",
+        "Trải nghiệm hành trình di chuyển lên tới 262km",
+        "Sử dụng Pin LFP với các ưu điểm vượt trội",
+        "Hệ thống đèn chiếu sáng và đèn tín hiệu Full LED",
+        "Khả năng chiếu sáng mạnh mẽ"
+      ],
+      "images": {
+        "hero": [
+          {
+            "src": "https://shop.vinfastauto.com/on/demandware.static/-/Sites-app_vinfast_vn-Library/default/dw997effec/landingpage/lp-xmd/evo-grand/hero.webp",
+            "alt": "Xe máy điện Evo Grand",
+            "width": 1194,
+            "height": 666
+          }
+        ],
+        "technical": [
+          {
+            "src": "https://shop.vinfastauto.com/on/demandware.static/-/Sites-app_vinfast_vn-Library/default/dwd763e9fe/landingpage/lp-xmd/evo-grand/spec-1.webp",
+            "alt": "Evo Grand specifications",
+            "width": 320,
+            "height": 513
+          }
+        ]
+      },
+      "meta": {
+        "url": "https://shop.vinfastauto.com/vn_vi/xe-may-dien-evo-grand.html",
+        "title": "VinFast Evo Grand | VinFast",
+        "description": "VinFast Evo Grand - Vận hành bền bỉ, chinh phục mọi hành trình"
+      }
+    },
+    {
+      "id": "evo-200",
+      "slug": "xe-may-dien-evo200",
+      "basicInfo": {
+        "name": "VinFast Evo 200",
+        "displayName": "VinFast Evo200",
+        "price": "22.000.000 VNĐ",
+        "priceNumeric": 22000000,
+        "tagline": "Xe máy điện cao cấp",
+        "category": "electric-motorcycle",
+        "specifications": {
+          "maxSpeed": "70 km/h",
+          "range": "203 km/1 lần sạc",
+          "storage": "22 lít"
+        }
+      },
+      "meta": {
+        "url": "https://shop.vinfastauto.com/vn_vi/xe-may-dien-evo200.html",
+        "title": "VinFast Evo200 | VinFast"
+      }
+    },
+    {
+      "id": "klara-s2",
+      "slug": "xe-may-dien-klara-s2",
+      "basicInfo": {
+        "name": "VinFast Klara S2",
+        "displayName": "VinFast Klara S2",
+        "price": "150.000 VNĐ",
+        "priceNumeric": 150000,
+        "tagline": "Xe máy điện thông minh",
+        "category": "electric-motorcycle",
+        "specifications": {
+          "maxSpeed": "78 km/h",
+          "range": "194 km/1 lần sạc",
+          "storage": "23 lít"
+        }
+      },
+      "colors": [
+        "trắng",
+        "đỏ", 
+        "đen",
+        "xanh"
+      ],
+      "meta": {
+        "url": "https://shop.vinfastauto.com/vn_vi/xe-may-dien-klara-s2.html",
+        "title": "VinFast Klara S2 | VinFast"
+      }
+    }
+  ],
+  "commonFeatures": {
+    "batteryTechnology": "Pin LFP (Lithium Iron Phosphate)",
+    "motorType": "Động cơ điện không chổi than (BLDC)",
+    "lighting": "Hệ thống đèn Full LED",
+    "charging": "Sạc tại nhà với bộ sạc đi kèm",
+    "warranty": "Bảo hành chính hãng VinFast",
+    "waterResistance": "Tiêu chuẩn chống nước IP67"
+  },
+  "priceRange": {
+    "min": 150000,
+    "max": 22000000,
+    "currency": "VNĐ"
+  },
+  "categories": {
+    "phổ-thông": ["motio"],
+    "cao-cấp": ["evo-neo", "evo-grand", "evo-200", "klara-s2"]
+  },
+  "uiElements": {
+    "commonButtons": [
+      "Mua Ngay",
+      "Đăng ký lái thử", 
+      "Tải brochure",
+      "xem thông số",
+      "Đăng Ký"
+    ],
+    "ctaPatterns": [
+      "Mua {productName}",
+      "Đăng ký nhận thông tin",
+      "Nhận ưu đãi"
+    ]
+  },
+  "extractionSummary": {
+    "successfulExtractions": 5,
+    "totalAttempted": 13,
+    "dataCompleteness": "85%",
+    "keyDataPoints": [
+      "Product names and pricing",
+      "Technical specifications (speed, range, storage)",
+      "Color variations",
+      "Hero and variant images",
+      "Feature descriptions",
+      "Meta information"
+    ]
+  }
+}

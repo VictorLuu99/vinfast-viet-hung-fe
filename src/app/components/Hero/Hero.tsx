@@ -78,7 +78,7 @@ export const Hero = () => {
             </div>
 
             {/* Trust indicators */}
-            <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-200">
+            {/* <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-200">
               <p className="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">Được tin tưởng bởi:</p>
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 opacity-60">
                 <div className="flex items-center space-x-2">
@@ -94,7 +94,7 @@ export const Hero = () => {
                   <span className="text-sm sm:text-base text-gray-600 font-medium">Chất lượng</span>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Hero Image */}

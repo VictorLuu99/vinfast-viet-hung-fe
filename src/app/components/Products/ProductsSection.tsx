@@ -2,9 +2,10 @@
 
 import { useState } from 'react';
 import { products, productCategories } from '@/lib/data/products';
+import { contactInfo } from '@/lib/data/stores';
 import { ProductCard } from './ProductCard';
 import { CategoryFilter } from './CategoryFilter';
-import { Sparkles, Zap, Star } from 'lucide-react';
+import { Sparkles, Zap, Star, MessageCircle } from 'lucide-react';
 
 export const ProductsSection = () => {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -86,13 +87,26 @@ export const ProductsSection = () => {
               Đội ngũ chuyên viên của chúng tôi luôn sẵn sàng hỗ trợ và tư vấn 
               để bạn chọn được sản phẩm phù hợp nhất.
             </p>
-            <a 
-              href="tel:0862669588"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-600 font-semibold rounded-xl hover:bg-gray-50 transform hover:-translate-y-1 transition-all duration-300 shadow-lg"
-            >
-              <Zap className="w-5 h-5" />
-              Gọi tư vấn ngay
-            </a>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a 
+                href="tel:0862669588"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-600 font-semibold rounded-xl hover:bg-gray-50 transform hover:-translate-y-1 transition-all duration-300 shadow-lg"
+              >
+                <Zap className="w-5 h-5" />
+                Gọi tư vấn ngay
+              </a>
+              {contactInfo.socialMedia?.facebook && (
+                <a 
+                  href={contactInfo.socialMedia.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-blue-700 text-white font-semibold rounded-xl hover:bg-blue-800 transform hover:-translate-y-1 transition-all duration-300 shadow-lg border border-blue-600"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  Tư vấn qua Facebook
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </div>

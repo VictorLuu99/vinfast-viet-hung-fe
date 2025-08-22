@@ -1,4 +1,5 @@
 import { contactInfo } from '@/lib/data/stores';
+import { FacebookIcon, ZaloIcon, YouTubeIcon } from '../Icons';
 
 export const ContactSection = () => {
   return (
@@ -79,9 +80,10 @@ export const ContactSection = () => {
                   href={contactInfo.socialMedia.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-colors duration-200"
+                  className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-colors duration-200 transform hover:scale-110 hover:shadow-lg"
+                  aria-label="Facebook"
                 >
-                  <span className="text-xl">📘</span>
+                  <FacebookIcon size={24} />
                 </a>
               )}
               
@@ -90,9 +92,10 @@ export const ContactSection = () => {
                   href={contactInfo.socialMedia.zalo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white hover:bg-blue-600 transition-colors duration-200"
+                  className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white hover:bg-blue-600 transition-colors duration-200 transform hover:scale-110 hover:shadow-lg"
+                  aria-label="Zalo"
                 >
-                  <span className="text-xl">💬</span>
+                  <ZaloIcon size={24} />
                 </a>
               )}
               
@@ -101,9 +104,10 @@ export const ContactSection = () => {
                   href={contactInfo.socialMedia.youtube}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white hover:bg-red-700 transition-colors duration-200"
+                  className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white hover:bg-red-700 transition-colors duration-200 transform hover:scale-110 hover:shadow-lg"
+                  aria-label="YouTube"
                 >
-                  <span className="text-xl">📺</span>
+                  <YouTubeIcon size={24} />
                 </a>
               )}
             </div>
@@ -125,6 +129,16 @@ export const ContactSection = () => {
             >
               Gọi hotline ngay
             </a>
+            {contactInfo.socialMedia?.facebook && (
+              <a 
+                href={contactInfo.socialMedia.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline btn-large bg-blue-600 text-white border-blue-600 hover:bg-blue-700 hover:border-blue-700"
+              >
+                Tư vấn qua Facebook
+              </a>
+            )}
             <a 
               href={`mailto:${contactInfo.email}`}
               className="btn btn-outline btn-large"

@@ -1,5 +1,7 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { Product } from '@/types/product';
+import { contactInfo } from '@/lib/data/stores';
 import { Zap, MapPin, Shield, Battery } from 'lucide-react';
 
 interface ProductCardProps {
@@ -29,12 +31,24 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           </div>
         )}
         
+        {/* Discount Badge */}
+        {product.discount && (
+          <div className="absolute top-2 sm:top-4 right-2 sm:right-4">
+            <span className="bg-red-500 text-white px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs font-semibold shadow-lg">
+              -{product.discount}%
+            </span>
+          </div>
+        )}
+        
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
           <div className="p-3 sm:p-4 w-full">
-            <button className="w-full bg-white text-gray-900 font-semibold py-2 px-3 sm:px-4 text-sm sm:text-base rounded-lg hover:bg-gray-50 transition-colors duration-200">
+            <Link 
+              href={`/products/${product.id}`}
+              className="w-full bg-white text-gray-900 font-semibold py-2 px-3 sm:px-4 text-sm sm:text-base rounded-lg hover:bg-gray-50 transition-colors duration-200 block text-center"
+            >
               Xem chi tiết
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -46,6 +60,19 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-200 line-clamp-2">
             {product.name}
           </h3>
+          
+          <div className="flex items-center gap-2 mb-1">
+            {product.originalPrice && product.originalPriceFormatted && (
+              <div className="text-sm sm:text-base text-gray-400 line-through">
+                {product.originalPriceFormatted}
+              </div>
+            )}
+            {product.discount && (
+              <div className="text-xs sm:text-sm text-red-500 font-semibold">
+                (-{product.discount}%)
+              </div>
+            )}
+          </div>
           
           <div className="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
             {product.priceFormatted}
@@ -87,10 +114,30 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           </div>
         </div>
         
-        {/* CTA Button */}
-        <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base rounded-lg sm:rounded-xl hover:from-blue-700 hover:to-purple-700 transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl">
-          Liên hệ tư vấn
-        </button>
+        {/* Action Buttons */}
+        <div className="space-y-3">
+          <Link 
+            href={`/products/${product.id}`}
+            className="w-full bg-white text-gray-900 font-semibold py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base rounded-lg sm:rounded-xl border-2 border-gray-300 hover:border-blue-500 hover:text-blue-600 transition-all duration-300 text-center block"
+          >
+            Xem chi tiết
+          </Link>
+          
+          {contactInfo.socialMedia?.facebook ? (
+            <a 
+              href={contactInfo.socialMedia.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base rounded-lg sm:rounded-xl hover:from-blue-700 hover:to-purple-700 transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl text-center block"
+            >
+              Liên hệ tư vấn
+            </a>
+          ) : (
+            <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base rounded-lg sm:rounded-xl hover:from-blue-700 hover:to-purple-700 transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl">
+              Liên hệ tư vấn
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

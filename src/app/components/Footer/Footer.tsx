@@ -1,5 +1,7 @@
 import { contactInfo } from '@/lib/data/stores';
 import Image from 'next/image';
+import Link from 'next/link';
+import { FacebookIcon, ZaloIcon, YouTubeIcon } from '../Icons';
 
 export const Footer = () => {
   return (
@@ -8,17 +10,19 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Company Info */}
           <div className="md:col-span-2">
-            <div className="flex items-center mb-4">
-              <Image
-                src="/images/logo/vinfast-logo.png"
-                alt="VinFast Việt Hùng Logo"
-                width={40}
-                height={40}
-                className="mr-3"
-              />
+            <div className="flex items-center mb-6">
+              <div className="relative bg-white rounded-lg p-4 mr-4 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                <Image
+                  src="/images/logo/vinfast-logo.png"
+                  alt="VinFast Việt Hùng Logo"
+                  width={80}
+                  height={80}
+                  className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24"
+                />
+              </div>
               <div>
-                <h3 className="text-xl font-bold">VinFast Việt Hùng</h3>
-                <p className="text-gray-400 text-sm">Đại lý chính hãng</p>
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">VinFast Việt Hùng</h3>
+                <p className="text-blue-300 text-sm font-medium">Đại lý chính hãng</p>
               </div>
             </div>
             <p className="text-gray-300 mb-4 leading-relaxed">
@@ -31,9 +35,10 @@ export const Footer = () => {
                   href={contactInfo.socialMedia.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white transition-colors duration-200"
+                  className="inline-flex items-center justify-center w-10 h-10 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all duration-300 transform hover:scale-110 hover:shadow-lg"
+                  aria-label="Facebook"
                 >
-                  📘 Facebook
+                  <FacebookIcon size={20} />
                 </a>
               )}
               {contactInfo.socialMedia?.zalo && (
@@ -41,9 +46,10 @@ export const Footer = () => {
                   href={contactInfo.socialMedia.zalo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white transition-colors duration-200"
+                  className="inline-flex items-center justify-center w-10 h-10 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-all duration-300 transform hover:scale-110 hover:shadow-lg"
+                  aria-label="Zalo"
                 >
-                  💬 Zalo
+                  <ZaloIcon size={20} />
                 </a>
               )}
               {contactInfo.socialMedia?.youtube && (
@@ -51,9 +57,10 @@ export const Footer = () => {
                   href={contactInfo.socialMedia.youtube}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white transition-colors duration-200"
+                  className="inline-flex items-center justify-center w-10 h-10 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-all duration-300 transform hover:scale-110 hover:shadow-lg"
+                  aria-label="YouTube"
                 >
-                  📺 YouTube
+                  <YouTubeIcon size={20} />
                 </a>
               )}
             </div>
@@ -64,24 +71,34 @@ export const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">Liên kết nhanh</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#home" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <Link href="/" className="text-gray-400 hover:text-white transition-colors duration-200">
                   Trang chủ
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#products" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <Link href="/#products" className="text-gray-400 hover:text-white transition-colors duration-200">
                   Sản phẩm
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#stores" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <Link href="/#stores" className="text-gray-400 hover:text-white transition-colors duration-200">
                   Cửa hàng
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#contact" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <Link href="/about" className="text-gray-400 hover:text-white transition-colors duration-200">
+                  Giới thiệu
+                </Link>
+              </li>
+              <li>
+                <Link href="/policy" className="text-gray-400 hover:text-white transition-colors duration-200">
+                  Chính sách
+                </Link>
+              </li>
+              <li>
+                <Link href="/#contact" className="text-gray-400 hover:text-white transition-colors duration-200">
                   Liên hệ
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -129,15 +146,15 @@ export const Footer = () => {
               © 2024 VinFast Việt Hùng. Tất cả quyền được bảo lưu.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
+              <Link href="/policy" className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
                 Chính sách bảo mật
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
+              </Link>
+              <Link href="/policy" className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
                 Điều khoản sử dụng
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
-                Sitemap
-              </a>
+              </Link>
+              <Link href="/policy" className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
+                Chính sách đổi trả
+              </Link>
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
-import { stores } from '@/lib/data/stores';
+import { stores, contactInfo } from '@/lib/data/stores';
 import { StoreCard } from './StoreCard';
-import { MapPin, Building2, Users, Star } from 'lucide-react';
+import { MapPin, Building2, Users, Star, MessageCircle } from 'lucide-react';
 
 export const StoresSection = () => {
   return (
@@ -15,7 +15,7 @@ export const StoresSection = () => {
           
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6">
             <span className="block">Hệ thống cửa hàng</span>
-            <span className="block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mt-2">
               VinFast Việt Hùng
             </span>
           </h2>
@@ -75,13 +75,26 @@ export const StoresSection = () => {
               Hãy liên hệ với chúng tôi để được hướng dẫn đường đi và 
               đặt lịch hẹn tư vấn tại cửa hàng gần nhất.
             </p>
-            <a 
-              href="tel:0862669588"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-600 font-semibold rounded-xl hover:bg-gray-50 transform hover:-translate-y-1 transition-all duration-300 shadow-lg"
-            >
-              <MapPin className="w-5 h-5" />
-              Liên hệ ngay
-            </a>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a 
+                href="tel:0862669588"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-600 font-semibold rounded-xl hover:bg-gray-50 transform hover:-translate-y-1 transition-all duration-300 shadow-lg"
+              >
+                <MapPin className="w-5 h-5" />
+                Liên hệ ngay
+              </a>
+              {contactInfo.socialMedia?.facebook && (
+                <a 
+                  href={contactInfo.socialMedia.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-blue-700 text-white font-semibold rounded-xl hover:bg-blue-800 transform hover:-translate-y-1 transition-all duration-300 shadow-lg border border-blue-600"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  Tư vấn qua Facebook
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </div>

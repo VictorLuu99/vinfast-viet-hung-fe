@@ -3,18 +3,19 @@ import { Store, ContactInfo } from '@/types/store';
 export const stores: Store[] = [
   {
     id: 1,
-    name: 'VinFast Việt Hùng - Vĩnh Phúc',
-    address: '123 Đường ABC, Phường XYZ, Thành phố Vĩnh Yên, Tỉnh Vĩnh Phúc',
+    name: 'VinFast Việt Hùng - Tam Hồng',
+    address: 'Tam Hồng – Yên Lạc – Vĩnh Phúc',
     phone: '086.266.9588',
-    email: 'vinhphuc@vinfast-viethung.vn',
+    email: 'tamhong@vinfast-viethung.vn',
     location: {
-      city: 'Vĩnh Yên',
+      city: 'Yên Lạc',
       province: 'Vĩnh Phúc',
       coordinates: {
         lat: 21.3087,
         lng: 105.6049
       }
     },
+    googleMapsUrl: 'https://share.google/Xogixc81rWxJ91799',
     status: 'active',
     workingHours: '8:00 - 20:00 (Thứ 2 - Chủ nhật)',
     services: [
@@ -34,18 +35,19 @@ export const stores: Store[] = [
   },
   {
     id: 2,
-    name: 'VinFast Việt Hùng - Phú Thọ',
-    address: '456 Đường DEF, Phường GHI, Thành phố Việt Trì, Tỉnh Phú Thọ',
-    phone: '086.266.9588',
-    email: 'phutho@vinfast-viethung.vn',
+    name: 'VinFast Việt Hùng - Hai Bà Trưng',
+    address: '337 Hai Bà Trưng – Tiền Châu – Phúc Yên – Vĩnh Phúc',
+    phone: '0961.456.515',
+    email: 'haibatrung@vinfast-viethung.vn',
     location: {
-      city: 'Việt Trì',
-      province: 'Phú Thọ',
+      city: 'Phúc Yên',
+      province: 'Vĩnh Phúc',
       coordinates: {
-        lat: 21.3011,
-        lng: 105.4300
+        lat: 21.2333,
+        lng: 105.7000
       }
     },
+    googleMapsUrl: 'https://share.google/lhObfMuihhh2ElGGz',
     status: 'active',
     workingHours: '8:00 - 20:00 (Thứ 2 - Chủ nhật)',
     services: [
@@ -65,18 +67,19 @@ export const stores: Store[] = [
   },
   {
     id: 3,
-    name: 'VinFast Việt Hùng - Vĩnh Phúc 2',
-    address: '789 Đường JKL, Phường MNO, Thành phố Phúc Yên, Tỉnh Vĩnh Phúc',
-    phone: '086.266.9588',
-    email: 'phucyen@vinfast-viethung.vn',
+    name: 'VinFast Việt Hùng - Nam Đồng Mạ',
+    address: 'Khu Nam Đồng Mạ, đường Nguyễn Tất Thành, Thanh Miếu, Việt Trì, Phú Thọ',
+    phone: '0829.912.555',
+    email: 'namdongma@vinfast-viethung.vn',
     location: {
-      city: 'Phúc Yên',
-      province: 'Vĩnh Phúc',
+      city: 'Việt Trì',
+      province: 'Phú Thọ',
       coordinates: {
-        lat: 21.2333,
-        lng: 105.7000
+        lat: 21.3011,
+        lng: 105.4300
       }
     },
+    googleMapsUrl: 'https://share.google/ZSYwdVbMgzZlfklo4',
     status: 'active',
     workingHours: '8:00 - 20:00 (Thứ 2 - Chủ nhật)',
     services: [
@@ -96,18 +99,19 @@ export const stores: Store[] = [
   },
   {
     id: 4,
-    name: 'VinFast Việt Hùng - Phú Thọ 2',
-    address: '321 Đường PQR, Phường STU, Thành phố Phú Thọ, Tỉnh Phú Thọ',
-    phone: '086.266.9588',
-    email: 'phutho2@vinfast-viethung.vn',
+    name: 'VinFast Việt Hùng - Hùng Vương',
+    address: '2070 Đại lộ Hùng Vương, P. Nông Trang, TP. Việt Trì, Phú Thọ',
+    phone: '036.3822.638',
+    email: 'hungvuong@vinfast-viethung.vn',
     location: {
-      city: 'Phú Thọ',
+      city: 'Việt Trì',
       province: 'Phú Thọ',
       coordinates: {
         lat: 21.4000,
         lng: 105.4333
       }
     },
+    googleMapsUrl: 'https://share.google/07voeuLqcU5SWHKr1',
     status: 'active',
     workingHours: '8:00 - 20:00 (Thứ 2 - Chủ nhật)',
     services: [
@@ -133,7 +137,7 @@ export const contactInfo: ContactInfo = {
   address: 'VinFast Việt Hùng - Hệ thống đại lý chính hãng tại Vĩnh Phúc và Phú Thọ',
   workingHours: '8:00 - 20:00 (Thứ 2 - Chủ nhật)',
   socialMedia: {
-    facebook: 'https://facebook.com/vinfastviethung',
+    facebook: 'https://www.facebook.com/profile.php?id=61567009648021',
     zalo: 'https://zalo.me/0862669588',
     youtube: 'https://youtube.com/@vinfastviethung'
   }

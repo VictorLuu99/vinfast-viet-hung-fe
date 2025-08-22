@@ -12,6 +12,7 @@ export interface Store {
       lng: number;
     };
   };
+  googleMapsUrl?: string;
   status: 'active' | 'inactive';
   workingHours?: string;
   services: string[];

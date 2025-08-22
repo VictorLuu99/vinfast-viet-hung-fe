@@ -1,5 +1,5 @@
 import { Store } from '@/types/store';
-import { MapPin, Phone, Mail, Clock, CheckCircle, Star } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, CheckCircle, Star, ExternalLink } from 'lucide-react';
 
 interface StoreCardProps {
   store: Store;
@@ -114,9 +114,21 @@ export const StoreCard = ({ store }: StoreCardProps) => {
         >
           Gọi ngay
         </a>
-        <button className="flex-1 bg-white/10 text-white font-semibold py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base rounded-lg sm:rounded-xl border border-white/30 hover:bg-white/20 transition-all duration-300">
-          Xem bản đồ
-        </button>
+        {store.googleMapsUrl ? (
+          <a 
+            href={store.googleMapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 bg-white/10 text-white font-semibold py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base rounded-lg sm:rounded-xl border border-white/30 hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2"
+          >
+            <ExternalLink className="w-4 h-4" />
+            Xem bản đồ
+          </a>
+        ) : (
+          <button className="flex-1 bg-white/10 text-white font-semibold py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base rounded-lg sm:rounded-xl border border-white/30 hover:bg-white/20 transition-all duration-300">
+            Xem bản đồ
+          </button>
+        )}
       </div>
     </div>
   );

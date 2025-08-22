@@ -1,38 +1,4 @@
-import { Product, ProductCategory } from '@/types/product';
-
-export const productCategories: ProductCategory[] = [
-  {
-    id: 'all',
-    name: 'all',
-    displayName: 'Tất cả',
-    count: 13,
-    description: 'Tất cả các dòng xe máy điện VinFast'
-  },
-  {
-    id: 'cao-cap',
-    name: 'cao-cap',
-    displayName: 'Cao cấp',
-    count: 3,
-    description: 'Dòng xe cao cấp với công nghệ hiện đại'
-  },
-  {
-    id: 'trung-cap',
-    name: 'trung-cap',
-    displayName: 'Trung cấp',
-    count: 4,
-    description: 'Dòng xe trung cấp cân bằng giữa chất lượng và giá cả'
-  },
-  {
-    id: 'pho-thong',
-    name: 'pho-thong',
-    displayName: 'Phổ thông',
-    count: 6,
-    description: 'Dòng xe phổ thông phù hợp với mọi người dùng'
-  }
-];
-
-// Import products data from COMPLETE_VINFAST_PRODUCTS_DATA.json
-const productsData = {
+{
   "products": [
     {
       "id": "evo-neo",
@@ -64,7 +30,7 @@ const productsData = {
         "main": "/images/bikes/vinfast-evo-neo-official.webp",
         "gallery": [
           "https://shop.vinfastauto.com/on/demandware.static/-/Sites-app_vinfast_vn-Library/default/dw0d5e035f/images/PDP-XMD/evoneo/img-banner-info-sp.webp",
-          // "https://shop.vinfastauto.com/images/PDP-XMD/evoneo/img-connect.jpg",
+          "https://shop.vinfastauto.com/images/PDP-XMD/evoneo/img-connect.jpg",
           "https://shop.vinfastauto.com/on/demandware.static/-/Sites-app_vinfast_vn-Library/default/dw16dee281/images/PDP-XMD/evoneo/img-part-03.webp",
           "https://shop.vinfastauto.com/on/demandware.static/-/Sites-app_vinfast_vn-Library/default/dw6ab30e7b/images/PDP-XMD/evoneo/img-part-01.webp"
         ]
@@ -101,7 +67,7 @@ const productsData = {
         "main": "/images/bikes/vinfast-motio-official.webp",
         "gallery": [
           "https://shop.vinfastauto.com/on/demandware.static/-/Sites-app_vinfast_vn-Library/default/dw6bad8119/images/PDP-XMD/motio/img-banner-info.webp",
-          // "https://shop.vinfastauto.com/images/PDP-XMD/motio/img-connect.png"
+          "https://shop.vinfastauto.com/images/PDP-XMD/motio/img-connect.png"
         ]
       },
       "badge": "Học sinh"
@@ -169,7 +135,7 @@ const productsData = {
         "main": "/images/bikes/vinfast-evo200-official.webp",
         "gallery": [
           "https://shop.vinfastauto.com/on/demandware.static/-/Sites-app_vinfast_vn-Library/default/dw5b8cc72a/images/PDP-XMD/evo200/img-banner-info.webp",
-          // "https://shop.vinfastauto.com/images/PDP-XMD/evo200/img-connect.jpg"
+          "https://shop.vinfastauto.com/images/PDP-XMD/evo200/img-connect.jpg"
         ]
       },
       "badge": "Chuẩn"
@@ -231,13 +197,8 @@ const productsData = {
       ],
       "colors": ["Đen", "Trắng", "Xanh"], 
       "images": {
-        "main": "/images/bikes/vinfast-evo-lite-neo-official.webp",
-        "gallery": [
-          "/images/bikes/vinfast-evo-lite-neo-red.webp",
-          "/images/bikes/vinfast-evo-lite-neo-white.webp", 
-          "/images/bikes/vinfast-evo-lite-neo-black.webp",
-          "/images/bikes/vinfast-evo-lite-neo-blue.webp"
-        ]
+        "main": "/images/bikes/vinfast-evo-neo-official.webp",
+        "gallery": []
       },
       "badge": "Cơ bản"
     },
@@ -469,48 +430,19 @@ const productsData = {
       },
       "badge": "Bán chạy"
     }
-  ]
-};
-
-// Convert JSON data to Product interface format
-export const products: Product[] = productsData.products.map(p => ({
-  id: p.id,
-  name: p.name,
-  category: p.category as 'cao-cap' | 'trung-cap' | 'pho-thong',
-  price: p.price,
-  priceFormatted: p.priceFormatted,
-  originalPrice: p.price,
-  originalPriceFormatted: p.priceFormatted,
-  discount: p.discount,
-  specs: `${p.tagline} | Tốc độ tối đa ${p.specs.maxSpeed} | Quãng đường ${p.specs.range}`,
-  features: p.features,
-  image: p.images.main,
-  gallery: p.images.gallery,
-  badge: p.badge,
-  range: parseInt(p.specs.range.split(' ')[0]),
-  power: parseInt(p.specs.motor.match(/\d+/)?.[0] || '1500'),
-  battery: p.specs.battery,
-  weight: 85, // Default weight
-  maxSpeed: parseInt(p.specs.maxSpeed.split(' ')[0]),
-  chargingTime: p.specs.chargingTime,
-  warranty: '2 năm',
-  available: true,
-  colors: p.colors,
-  dimensions: {
-    length: 1800,
-    width: 650,
-    height: 1070
-  },
-  motorType: p.specs.motor,
-  brakeSystem: 'Phanh đĩa phía trước và sau',
-  lighting: 'Hệ thống đèn Full LED'
-}));
-
-export const getProductsByCategory = (category: string): Product[] => {
-  if (category === 'all') return products;
-  return products.filter(product => product.category === category);
-};
-
-export const getProductById = (id: string): Product | undefined => {
-  return products.find(product => product.id === id);
-};
+  ],
+  "metadata": {
+    "totalProducts": 13,
+    "categories": {
+      "cao-cap": 3,
+      "trung-cap": 4, 
+      "pho-thong": 6
+    },
+    "priceRange": {
+      "min": 12000000,
+      "max": 56900000
+    },
+    "extractedAt": "2025-01-22",
+    "source": "https://shop.vinfastauto.com"
+  }
+}
