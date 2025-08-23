@@ -92,11 +92,11 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                 {product.badge}
               </span>
             )}
-            {product.discount && (
+            {/* {product.discount && (
               <span className="bg-red-500 text-white px-3 py-1.5 rounded-full text-sm font-semibold shadow-lg">
                 -{product.discount}%
               </span>
-            )}
+            )} */}
           </div>
           
           {/* Image Counter */}
@@ -271,18 +271,18 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                   {product.dimensions && (
                     <div className="md:col-span-2 space-y-4">
                       <h4 className="font-semibold text-gray-900 border-b pb-2">Kích thước & Khác</h4>
-                      <div className="grid grid-cols-3 gap-4">
-                        <div className="flex justify-between items-center py-2">
-                          <span className="text-gray-600">Dài</span>
-                          <span className="font-semibold">{product.dimensions.length}mm</span>
+                      <div className="grid grid-cols-3 gap-6">
+                        <div className="text-center py-2 px-4 bg-gray-50 rounded-lg">
+                          <span className="block text-gray-600 text-sm mb-1">Dài</span>
+                          <span className="block font-semibold text-lg">{product.dimensions.length}mm</span>
                         </div>
-                        <div className="flex justify-between items-center py-2">
-                          <span className="text-gray-600">Rộng</span>
-                          <span className="font-semibold">{product.dimensions.width}mm</span>
+                        <div className="text-center py-2 px-4 bg-gray-50 rounded-lg">
+                          <span className="block text-gray-600 text-sm mb-1">Rộng</span>
+                          <span className="block font-semibold text-lg">{product.dimensions.width}mm</span>
                         </div>
-                        <div className="flex justify-between items-center py-2">
-                          <span className="text-gray-600">Cao</span>
-                          <span className="font-semibold">{product.dimensions.height}mm</span>
+                        <div className="text-center py-2 px-4 bg-gray-50 rounded-lg">
+                          <span className="block text-gray-600 text-sm mb-1">Cao</span>
+                          <span className="block font-semibold text-lg">{product.dimensions.height}mm</span>
                         </div>
                       </div>
                     </div>

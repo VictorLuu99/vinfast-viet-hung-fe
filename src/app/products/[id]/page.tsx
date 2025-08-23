@@ -90,7 +90,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             {/* Price */}
             <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-2xl border border-blue-100">
               <div className="flex items-center gap-4 mb-3">
-                {product.originalPrice && product.originalPriceFormatted && (
+                {/* {product.originalPrice && product.originalPriceFormatted && (
                   <div className="text-xl text-gray-400 line-through">
                     {product.originalPriceFormatted}
                   </div>
@@ -99,7 +99,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
                   <div className="text-lg text-red-500 font-semibold">
                     (-{product.discount}%)
                   </div>
-                )}
+                )} */}
               </div>
               <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
                 {product.priceFormatted}
