@@ -15,7 +15,7 @@ const nextConfig: NextConfig = {
     ],
   },
   // Asset prefix for Cloudflare Pages
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/vinfast-viethung' : '',
+  // assetPrefix: process.env.NODE_ENV === 'production' ? '/vinfast-viethung' : '',
 }
 
 export default nextConfig
