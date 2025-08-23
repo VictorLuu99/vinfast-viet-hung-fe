@@ -13,7 +13,7 @@ export interface Product {
   gallery?: string[];
   badge?: string;
   range: number; // km
-  power: number; // kW
+  power: number; // W
   battery: string;
   weight: number; // kg
   maxSpeed: number; // km/h
@@ -29,6 +29,34 @@ export interface Product {
   motorType?: string;
   brakeSystem?: string;
   lighting?: string;
+  
+  // Extended properties for comprehensive product data
+  tagline?: string;
+  description?: string;
+  keySpecs?: {
+    maxSpeed?: string;
+    range?: string;
+    storage?: string;
+    battery?: string;
+    chargingTime?: string;
+    motor?: string;
+    maxPower?: string;
+    weight?: string;
+    waterResistance?: string;
+  };
+  detailedSpecs?: {
+    motorPower?: string;
+    batteryType?: string;
+    batteryCapacity?: string;
+    chargingType?: string;
+    brakeSystem?: string;
+    suspension?: string;
+    wheelSize?: string;
+    lighting?: string;
+    display?: string;
+    waterResistance?: string;
+  };
+  colorVariants?: Record<string, string>;
 }
 
 export interface ProductCategory {

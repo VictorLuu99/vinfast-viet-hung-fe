@@ -31,7 +31,7 @@ export const productCategories: ProductCategory[] = [
   }
 ];
 
-// Import products data from COMPLETE_VINFAST_PRODUCTS_DATA.json
+// Comprehensive VinFast Products Data - Crawled from Official Website
 const productsData = {
   "products": [
     {
@@ -229,7 +229,7 @@ const productsData = {
         "Hệ thống phanh tích hợp với phanh đĩa bánh trước",
         "Hệ thống đèn Full LED và đèn pha projector"
       ],
-      "colors": ["Đen", "Trắng", "Xanh"], 
+      "colors": ["Đỏ Tươi", "Trắng Ngọc Trai", "Đen Nhám", "Xanh Tím Than"], 
       "images": {
         "main": "/images/bikes/vinfast-evo-lite-neo-official.webp",
         "gallery": [
