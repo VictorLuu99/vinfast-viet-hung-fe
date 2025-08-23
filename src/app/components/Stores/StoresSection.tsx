@@ -26,34 +26,34 @@ export const StoresSection = () => {
           </p>
           
           {/* Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-4 gap-6 max-w-4xl mx-auto mb-12">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto mb-12">
             <div className="text-center">
-              <div className="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-3 border border-blue-400/30">
-                <MapPin className="w-8 h-8 text-blue-400" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 border border-blue-400/30">
+                <MapPin className="w-6 h-6 sm:w-8 sm:h-8 text-blue-400" />
               </div>
-              <div className="text-2xl font-bold text-white">4</div>
-              <div className="text-sm text-gray-300">Cửa hàng</div>
+              <div className="text-lg sm:text-2xl font-bold text-white">4</div>
+              <div className="text-xs sm:text-sm text-gray-300">Cửa hàng</div>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-3 border border-purple-400/30">
-                <Building2 className="w-8 h-8 text-purple-400" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 border border-purple-400/30">
+                <Building2 className="w-6 h-6 sm:w-8 sm:h-8 text-purple-400" />
               </div>
-              <div className="text-2xl font-bold text-white">2</div>
-              <div className="text-sm text-gray-300">Tỉnh thành</div>
+              <div className="text-lg sm:text-2xl font-bold text-white">2</div>
+              <div className="text-xs sm:text-sm text-gray-300">Tỉnh thành</div>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-3 border border-green-400/30">
-                <Users className="w-8 h-8 text-green-400" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 border border-green-400/30">
+                <Users className="w-6 h-6 sm:w-8 sm:h-8 text-green-400" />
               </div>
-              <div className="text-2xl font-bold text-white">50+</div>
-              <div className="text-sm text-gray-300">Nhân viên</div>
+              <div className="text-lg sm:text-2xl font-bold text-white">50+</div>
+              <div className="text-xs sm:text-sm text-gray-300">Nhân viên</div>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-3 border border-yellow-400/30">
-                <Star className="w-8 h-8 text-yellow-400" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 border border-yellow-400/30">
+                <Star className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-400" />
               </div>
-              <div className="text-2xl font-bold text-white">5.0</div>
-              <div className="text-sm text-gray-300">Đánh giá</div>
+              <div className="text-lg sm:text-2xl font-bold text-white">5.0</div>
+              <div className="text-xs sm:text-sm text-gray-300">Đánh giá</div>
             </div>
           </div>
         </div>
