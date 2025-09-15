@@ -1,5 +1,7 @@
 import React from 'react';
 import { Header } from '../components/Header/Header';
+import { HeroSection } from '../components/shared/HeroSection';
+import { Footer } from '../components/Footer/Footer';
 
 export default function PolicyPage() {
   return (
@@ -7,18 +9,10 @@ export default function PolicyPage() {
       <Header />
       <div className="min-h-screen bg-gray-50 pt-20">
         {/* Hero Section */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-          <div className="container mx-auto px-4 py-16">
-            <div className="max-w-4xl mx-auto text-center px-2 py-4">
-              <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                Chính sách
-              </h1>
-              <p className="text-xl md:text-2xl text-blue-100">
-                Chính sách dịch vụ khách hàng của VinFast Việt Hùng
-              </p>
-            </div>
-          </div>
-        </div>
+        <HeroSection
+          title="Chính sách"
+          description="Chính sách dịch vụ khách hàng của VinFast Việt Hùng"
+        />
 
         {/* Policies Content */}
         <div className="container mx-auto px-4 py-16">
@@ -245,6 +239,7 @@ export default function PolicyPage() {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     </>
   );

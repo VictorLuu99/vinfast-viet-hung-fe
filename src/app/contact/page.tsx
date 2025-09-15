@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Header } from '../components/Header/Header';
 import { Footer } from '../components/Footer/Footer';
+import { HeroSection } from '../components/shared/HeroSection';
 import { ContactSection } from '../components/Contact/ContactSection';
 import { ContactForm } from '../components/Contact/ContactForm';
 import { StoresSection } from '../components/Stores/StoresSection';
@@ -22,22 +23,14 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main>
+    <>
       <Header />
-
+      <div className="min-h-screen bg-gray-50 pt-20">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-green-600 text-white py-16">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Liên hệ với chúng tôi
-            </h1>
-            <p className="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">
-              VinFast Việt Hùng luôn sẵn sàng hỗ trợ và tư vấn mọi thắc mắc của bạn về xe điện VinFast
-            </p>
-          </div>
-        </div>
-      </section>
+      <HeroSection
+        title="Liên hệ với chúng tôi"
+        description="VinFast Việt Hùng luôn sẵn sàng hỗ trợ và tư vấn mọi thắc mắc của bạn về xe điện VinFast"
+      />
 
       {/* Quick Contact Info */}
       <ContactSection />
@@ -139,6 +132,7 @@ export default function ContactPage() {
       <StoresSection />
 
       <Footer />
-    </main>
+      </div>
+    </>
   );
 }

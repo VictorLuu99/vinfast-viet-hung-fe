@@ -1,5 +1,7 @@
 import React from 'react';
 import { Header } from '../components/Header/Header';
+import { HeroSection } from '../components/shared/HeroSection';
+import { Footer } from '../components/Footer/Footer';
 
 export default function AboutPage() {
   return (
@@ -7,18 +9,10 @@ export default function AboutPage() {
       <Header />
       <div className="min-h-screen bg-gray-50 pt-20">
         {/* Hero Section */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-          <div className="container mx-auto px-4 py-16">
-            <div className="max-w-4xl mx-auto text-center px-2 py-4">
-              <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                Về VinFast Việt Hùng
-              </h1>
-              <p className="text-xl md:text-2xl text-blue-100">
-                Đại lý chính hãng xe máy điện VinFast tại Vĩnh Phúc và Phú Thọ
-              </p>
-            </div>
-          </div>
-        </div>
+        <HeroSection
+          title="Về VinFast Việt Hùng"
+          description="Đại lý chính hãng xe điện VinFast tại Vĩnh Phúc và Phú Thọ"
+        />
 
         {/* Company Introduction */}
         <div className="container mx-auto px-4 py-16">
@@ -159,6 +153,7 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     </>
   );
