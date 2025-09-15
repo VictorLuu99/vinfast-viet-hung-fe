@@ -8,15 +8,21 @@ export async function generateStaticParams() {
     // Fetch all active job postings from the API
     const response = await apiClient.getJobs({ limit: 100 });
 
-    if (response.success && response.data) {
-      // Extract slugs from the API response
-      return response.data.map(job => ({
-        slug: job.slug
-      }));
+    if (response.success && response.data && Array.isArray(response.data)) {
+      // Extract slugs from the API response, filtering out invalid entries
+      const validSlugs = response.data
+        .filter(job => job && typeof job.slug === 'string' && job.slug.trim() !== '')
+        .map(job => ({
+          slug: job.slug
+        }));
+
+      if (validSlugs.length > 0) {
+        return validSlugs;
+      }
     }
 
-    // Fallback to sample slugs if API fails
-    console.warn('API request failed, using fallback slugs for jobs');
+    // Fallback to sample slugs if API fails or returns no valid data
+    console.warn('API request failed or returned no valid slugs, using fallback slugs for jobs');
     return [
       { slug: 'nhan-vien-ban-hang-xe-dien' },
       { slug: 'ky-thuat-vien-sua-chua-xe-dien' },

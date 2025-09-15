@@ -1,5 +1,5 @@
 // API client for VinFast VietHung frontend
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8787';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://vinfast-viethung-api.xox-labs-server.workers.dev';
 
 export interface ApiResponse<T> {
   success: boolean;
@@ -118,7 +118,7 @@ export interface Product {
   description?: string;
   tagline?: string;
   features: string[];
-  specs?: any;
+  specs?: Record<string, string | number>;
   color_variants: Record<string, string[]>; // Color name -> array of image URLs
   colors: string[];
   default_color?: string;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Header } from "../components/Header/Header";
 import { Footer } from "../components/Footer/Footer";
@@ -47,17 +47,22 @@ export default function ProductsPageClient() {
     setSortOrder(order);
   }, [searchParams]);
 
-  // Fetch products when filters change
-  useEffect(() => {
-    fetchProducts();
-  }, [selectedCategory, currentPage, sortBy, sortOrder]);
-
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     setIsLoading(true);
     setError(null);
 
     try {
-      const params: any = {
+      const params: {
+        page: number;
+        limit: number;
+        category?: string;
+        search?: string;
+        min_price?: number;
+        max_price?: number;
+        sort?: string;
+        order?: string;
+        color?: string;
+      } = {
         page: currentPage,
         limit: ITEMS_PER_PAGE,
         sort: sortBy,
@@ -89,7 +94,12 @@ export default function ProductsPageClient() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [selectedCategory, currentPage, sortBy, sortOrder, searchTerm]);
+
+  // Fetch products when filters change
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
 
   const handleCategoryChange = (category: string) => {
     const newSearchParams = new URLSearchParams(searchParams.toString());

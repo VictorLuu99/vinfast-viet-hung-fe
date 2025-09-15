@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Menu, X, Phone, ChevronDown } from 'lucide-react';
+import { Menu, X, Phone } from 'lucide-react';
 import Link from 'next/link';
 import { FacebookIcon, ZaloIcon, YouTubeIcon } from '../Icons';
 import { contactInfo } from '@/lib/data/stores';

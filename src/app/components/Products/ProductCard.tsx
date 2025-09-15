@@ -1,21 +1,76 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Product } from '@/lib/api';
+import { Product as ApiProduct } from '@/lib/api';
+import { Product as LocalProduct } from '@/types/product';
 import { contactInfo } from '@/lib/data/stores';
-import { Zap, Battery, Gauge, Clock, Award, MapPin, Shield } from 'lucide-react';
+import { Zap, Battery, MapPin, Shield } from 'lucide-react';
 
 interface ProductCardProps {
-  product: Product;
+  product: ApiProduct | LocalProduct;
   viewMode?: 'grid' | 'list';
 }
 
-export const ProductCard = ({ product, viewMode = 'grid' }: ProductCardProps) => {
+// Type guard to check if product is from API
+const isApiProduct = (product: ApiProduct | LocalProduct): product is ApiProduct => {
+  return 'color_variants' in product;
+};
+
+// Helper functions to get values from either product type
+const getProductImage = (product: ApiProduct | LocalProduct): string => {
+  if (isApiProduct(product)) {
+    return product.color_variants[product.default_color || Object.keys(product.color_variants)[0]]?.[0] || '/images/placeholder-product.jpg';
+  } else {
+    return product.image || '/images/placeholder-product.jpg';
+  }
+};
+
+const getProductSlug = (product: ApiProduct | LocalProduct): string => {
+  if (isApiProduct(product)) {
+    return product.slug;
+  } else {
+    return product.id; // Use id as slug for local products
+  }
+};
+
+const getFormattedPrice = (product: ApiProduct | LocalProduct): string => {
+  if (isApiProduct(product)) {
+    return product.price_formatted;
+  } else {
+    return product.priceFormatted;
+  }
+};
+
+const getRange = (product: ApiProduct | LocalProduct): number => {
+  if (isApiProduct(product)) {
+    return product.range_km;
+  } else {
+    return product.range;
+  }
+};
+
+const getMaxSpeed = (product: ApiProduct | LocalProduct): number => {
+  if (isApiProduct(product)) {
+    return product.max_speed_kmh;
+  } else {
+    return product.maxSpeed;
+  }
+};
+
+const getBatteryInfo = (product: ApiProduct | LocalProduct): string => {
+  if (isApiProduct(product)) {
+    return `${product.battery_capacity || ''} ${product.battery_type || ''}`.trim() || 'Pin lithium';
+  } else {
+    return product.battery;
+  }
+};
+
+export const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <div className="group bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-blue-200 transform hover:-translate-y-1 sm:hover:-translate-y-2">
       {/* Image Section */}
       <div className="relative overflow-hidden">
         <Image
-          src={product.image}
+          src={getProductImage(product)}
           alt={product.name}
           width={400}
           height={300}
@@ -45,7 +100,7 @@ export const ProductCard = ({ product, viewMode = 'grid' }: ProductCardProps) =>
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
           <div className="p-3 sm:p-4 w-full">
             <Link 
-              href={`/products/${product.slug}`}
+              href={`/products/${getProductSlug(product)}`}
               className="w-full bg-white text-gray-900 font-semibold py-2 px-3 sm:px-4 text-sm sm:text-base rounded-lg hover:bg-gray-50 transition-colors duration-200 block text-center"
             >
               Xem chi tiết
@@ -76,7 +131,7 @@ export const ProductCard = ({ product, viewMode = 'grid' }: ProductCardProps) =>
           </div> */}
           
           <div className="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-            {product.price_formatted}
+            {getFormattedPrice(product)}
           </div>
         </div>
         
@@ -99,15 +154,15 @@ export const ProductCard = ({ product, viewMode = 'grid' }: ProductCardProps) =>
         <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-4 sm:mb-6">
           <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-500">
             <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500 flex-shrink-0" />
-            <span className="font-medium truncate">{product.range_km}km</span>
+            <span className="font-medium truncate">{getRange(product)}km</span>
           </div>
           <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-500">
             <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
-            <span className="font-medium truncate">{product.max_speed_kmh}km/h</span>
+            <span className="font-medium truncate">{getMaxSpeed(product)}km/h</span>
           </div>
           <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-500">
             <Battery className="w-3 h-3 sm:w-4 sm:h-4 text-purple-500 flex-shrink-0" />
-            <span className="font-medium truncate">{product.battery_capacity || product.battery_type || 'Pin LFP'}</span>
+            <span className="font-medium truncate">{getBatteryInfo(product)}</span>
           </div>
           <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-500">
             <Shield className="w-3 h-3 sm:w-4 sm:h-4 text-orange-500 flex-shrink-0" />
@@ -118,7 +173,7 @@ export const ProductCard = ({ product, viewMode = 'grid' }: ProductCardProps) =>
         {/* Action Buttons */}
         <div className="space-y-3">
           <Link 
-            href={`/products/${product.slug}`}
+            href={`/products/${getProductSlug(product)}`}
             className="w-full bg-white text-gray-900 font-semibold py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base rounded-lg sm:rounded-xl border-2 border-gray-300 hover:border-blue-500 hover:text-blue-600 transition-all duration-300 text-center block"
           >
             Xem chi tiết

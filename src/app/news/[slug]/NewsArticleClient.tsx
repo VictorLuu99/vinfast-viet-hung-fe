@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,7 +17,6 @@ import {
 import {
   Calendar,
   ArrowLeft,
-  Share2,
   Facebook,
   Twitter,
   Copy,
@@ -37,13 +36,7 @@ export default function NewsArticleClient() {
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
 
-  useEffect(() => {
-    if (articleSlug) {
-      fetchArticle();
-    }
-  }, [articleSlug]);
-
-  const fetchArticle = async () => {
+  const fetchArticle = useCallback(async () => {
     setIsLoading(true);
     setError(null);
 
@@ -63,9 +56,15 @@ export default function NewsArticleClient() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [articleSlug]);
 
-  const fetchRelatedArticles = async (category: string) => {
+  useEffect(() => {
+    if (articleSlug) {
+      fetchArticle();
+    }
+  }, [articleSlug, fetchArticle]);
+
+  const fetchRelatedArticles = useCallback(async (category: string) => {
     try {
       const response = await apiClient.getNews({
         category,
@@ -80,7 +79,7 @@ export default function NewsArticleClient() {
     } catch (err) {
       console.error("Error fetching related articles:", err);
     }
-  };
+  }, [articleSlug]);
 
   const getCategoryLabel = (slug: string) => {
     return (

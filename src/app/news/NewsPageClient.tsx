@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Header } from "../components/Header/Header";
 import { Footer } from "../components/Footer/Footer";
@@ -38,17 +38,16 @@ export default function NewsPageClient() {
     setCurrentPage(page);
   }, [searchParams]);
 
-  // Fetch articles when filters change
-  useEffect(() => {
-    fetchArticles();
-  }, [selectedCategory, currentPage]);
-
-  const fetchArticles = async () => {
+  const fetchArticles = useCallback(async () => {
     setIsLoading(true);
     setError(null);
 
     try {
-      const params: any = {
+      const params: {
+        page: number;
+        limit: number;
+        category?: string;
+      } = {
         page: currentPage,
         limit: ITEMS_PER_PAGE,
       };
@@ -76,7 +75,12 @@ export default function NewsPageClient() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [selectedCategory, currentPage]);
+
+  // Fetch articles when filters change
+  useEffect(() => {
+    fetchArticles();
+  }, [fetchArticles]);
 
   // Filter articles by search term (client-side)
   const filteredArticles = articles.filter(

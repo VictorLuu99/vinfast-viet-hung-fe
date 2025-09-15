@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Header } from "../components/Header/Header";
 import { Footer } from "../components/Footer/Footer";
@@ -38,17 +38,17 @@ export default function RecruitmentPageClient() {
     setCurrentPage(page);
   }, [searchParams]);
 
-  // Fetch jobs when filters change
-  useEffect(() => {
-    fetchJobs();
-  }, [selectedCategory, currentPage]);
-
-  const fetchJobs = async () => {
+  const fetchJobs = useCallback(async () => {
     setIsLoading(true);
     setError(null);
 
     try {
-      const params: any = {
+      const params: {
+        page: number;
+        limit: number;
+        department?: string;
+        location?: string;
+      } = {
         page: currentPage,
         limit: ITEMS_PER_PAGE,
       };
@@ -76,7 +76,12 @@ export default function RecruitmentPageClient() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [selectedCategory, currentPage]);
+
+  // Fetch jobs when filters change
+  useEffect(() => {
+    fetchJobs();
+  }, [fetchJobs]);
 
   // Filter jobs by search term (client-side)
   const filteredJobs = jobs.filter(

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { Header } from "../../components/Header/Header";
@@ -49,13 +49,7 @@ export default function JobDetailClient() {
     resumeFile: null as File | null,
   });
 
-  useEffect(() => {
-    if (jobSlug) {
-      fetchJob();
-    }
-  }, [jobSlug]);
-
-  const fetchJob = async () => {
+  const fetchJob = useCallback(async () => {
     setIsLoading(true);
     setError(null);
 
@@ -75,9 +69,15 @@ export default function JobDetailClient() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [jobSlug]);
 
-  const fetchRelatedJobs = async (department: string) => {
+  useEffect(() => {
+    if (jobSlug) {
+      fetchJob();
+    }
+  }, [jobSlug, fetchJob]);
+
+  const fetchRelatedJobs = useCallback(async (department: string) => {
     try {
       const response = await apiClient.getJobs({
         department,
@@ -92,7 +92,7 @@ export default function JobDetailClient() {
     } catch (err) {
       console.error("Error fetching related jobs:", err);
     }
-  };
+  }, [jobSlug]);
 
   const getCategoryLabel = (slug: string) => {
     return (
