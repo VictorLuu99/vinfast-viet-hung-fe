@@ -34,7 +34,7 @@ export const Header = () => {
         ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-200' 
         : 'bg-white'
     }`}>
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-18 md:h-20 lg:h-22">
           {/* Logo and Brand */}
           <div className="flex items-center gap-2 sm:gap-3">
@@ -77,14 +77,14 @@ export const Header = () => {
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
             </Link>
             
-            <Link 
+            <Link
               href="/#stores"
               className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 relative group text-sm lg:text-base"
             >
               Cửa hàng
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
             </Link>
-            
+
             <Link 
               href="/about"
               className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 relative group text-sm lg:text-base"
@@ -100,9 +100,25 @@ export const Header = () => {
               Chính sách
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
             </Link>
-            
-            <Link 
-              href="/#contact"
+
+            <Link
+              href="/news"
+              className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 relative group text-sm lg:text-base"
+            >
+              Tin tức
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+
+            <Link
+              href="/recruitment"
+              className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 relative group text-sm lg:text-base"
+            >
+              Tuyển dụng
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+
+            <Link
+              href="/contact"
               className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 relative group text-sm lg:text-base"
             >
               Liên hệ
@@ -192,14 +208,14 @@ export const Header = () => {
                 Sản phẩm
               </Link>
               
-              <Link 
+              <Link
                 href="/#stores"
                 onClick={closeMobileMenu}
                 className="block w-full text-left py-3 px-4 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200 font-medium"
               >
                 Cửa hàng
               </Link>
-              
+
               <Link 
                 href="/about"
                 onClick={closeMobileMenu}
@@ -215,9 +231,25 @@ export const Header = () => {
               >
                 Chính sách
               </Link>
-              
-              <Link 
-                href="/#contact"
+
+              <Link
+                href="/news"
+                onClick={closeMobileMenu}
+                className="block w-full text-left py-3 px-4 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200 font-medium"
+              >
+                Tin tức
+              </Link>
+
+              <Link
+                href="/recruitment"
+                onClick={closeMobileMenu}
+                className="block w-full text-left py-3 px-4 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200 font-medium"
+              >
+                Tuyển dụng
+              </Link>
+
+              <Link
+                href="/contact"
                 onClick={closeMobileMenu}
                 className="block w-full text-left py-3 px-4 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200 font-medium"
               >

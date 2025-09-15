@@ -5,7 +5,7 @@ import { MapPin, Building2, Users, Star, MessageCircle } from 'lucide-react';
 export const StoresSection = () => {
   return (
     <section id="stores" className="py-16 sm:py-20 md:py-24 lg:py-28 xl:py-32 bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 text-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 max-w-8xl">
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-2 bg-blue-500/20 text-blue-300 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6 border border-blue-400/30">

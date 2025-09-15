@@ -30,7 +30,7 @@ export const Hero = () => {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 relative z-10 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 lg:gap-20 xl:gap-24 items-center max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 lg:gap-20 xl:gap-24 items-center max-w-8xl mx-auto">
           {/* Content */}
           <div className="text-center lg:text-left order-2 lg:order-1">
             {/* Badge */}

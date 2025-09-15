@@ -35,7 +35,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <Link 
             href="/"
             className="inline-flex items-center text-gray-600 hover:text-blue-600 transition-colors duration-200"
@@ -46,7 +46,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center space-x-2 text-sm text-gray-500 mb-8">
           <Link href="/" className="flex items-center hover:text-blue-600 transition-colors duration-200">

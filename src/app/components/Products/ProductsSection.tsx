@@ -16,7 +16,7 @@ export const ProductsSection = () => {
 
   return (
     <section id="products" className="py-16 sm:py-20 md:py-24 lg:py-28 xl:py-32 bg-gradient-to-br from-gray-50 via-white to-blue-50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 max-w-8xl">
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16">
           {/* Badge */}
