@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import NewsPageClient from './NewsPageClient';
+import { LoadingSpinner } from '../components/shared/LoadingSpinner';
 
 export const metadata: Metadata = {
   title: 'Tin tức VinFast - VinFast Việt Hùng | Tin tức xe điện mới nhất',
@@ -17,5 +19,13 @@ export const metadata: Metadata = {
 };
 
 export default function NewsPage() {
-  return <NewsPageClient />;
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <LoadingSpinner size="lg" />
+      </div>
+    }>
+      <NewsPageClient />
+    </Suspense>
+  );
 }

@@ -34,7 +34,7 @@ export const JobCard = ({ job }: JobCardProps) => {
 
         {/* Job Title */}
         <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 hover:text-blue-600 transition-colors">
-          <Link href={`/recruitment/${job.id}`}>
+          <Link href={`/recruitment/${job.slug}`}>
             {job.title}
           </Link>
         </h3>
@@ -95,7 +95,7 @@ export const JobCard = ({ job }: JobCardProps) => {
 
           {/* Apply Button */}
           <Link
-            href={`/recruitment/${job.id}`}
+            href={`/recruitment/${job.slug}`}
             className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium group"
           >
             Xem chi tiết

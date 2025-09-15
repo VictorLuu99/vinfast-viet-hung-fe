@@ -18,6 +18,7 @@ export interface ApiResponse<T> {
 export interface NewsArticle {
   id: number;
   title: string;
+  slug: string;
   content: string;
   excerpt?: string;
   featured_image?: string;
@@ -38,6 +39,7 @@ export interface NewsCategory {
 export interface Job {
   id: number;
   title: string;
+  slug: string;
   description: string;
   requirements?: string;
   location: string;
@@ -152,7 +154,12 @@ class ApiClient {
     return this.request(`/api/news?${searchParams}`);
   }
 
-  async getNewsArticle(id: string): Promise<ApiResponse<NewsArticle>> {
+  async getNewsArticle(slug: string): Promise<ApiResponse<NewsArticle>> {
+    return this.request(`/api/news/by-slug/${slug}`);
+  }
+
+  // Fallback method for ID-based lookup (if needed)
+  async getNewsArticleById(id: string): Promise<ApiResponse<NewsArticle>> {
     return this.request(`/api/news/${id}`);
   }
 
@@ -176,7 +183,12 @@ class ApiClient {
     return this.request(`/api/recruitment/jobs?${searchParams}`);
   }
 
-  async getJob(id: string): Promise<ApiResponse<JobPosting>> {
+  async getJob(slug: string): Promise<ApiResponse<JobPosting>> {
+    return this.request(`/api/recruitment/jobs/by-slug/${slug}`);
+  }
+
+  // Fallback method for ID-based lookup (if needed)
+  async getJobById(id: string): Promise<ApiResponse<JobPosting>> {
     return this.request(`/api/recruitment/jobs/${id}`);
   }
 
@@ -210,6 +222,35 @@ class ApiClient {
 export const apiClient = new ApiClient();
 
 // Utility functions
+export const generateSlug = (title: string): string => {
+  // Vietnamese character mapping
+  const vietnameseMap: { [key: string]: string } = {
+    'à': 'a', 'á': 'a', 'ạ': 'a', 'ả': 'a', 'ã': 'a',
+    'â': 'a', 'ầ': 'a', 'ấ': 'a', 'ậ': 'a', 'ẩ': 'a', 'ẫ': 'a',
+    'ă': 'a', 'ằ': 'a', 'ắ': 'a', 'ặ': 'a', 'ẳ': 'a', 'ẵ': 'a',
+    'è': 'e', 'é': 'e', 'ẹ': 'e', 'ẻ': 'e', 'ẽ': 'e',
+    'ê': 'e', 'ề': 'e', 'ế': 'e', 'ệ': 'e', 'ể': 'e', 'ễ': 'e',
+    'ì': 'i', 'í': 'i', 'ị': 'i', 'ỉ': 'i', 'ĩ': 'i',
+    'ò': 'o', 'ó': 'o', 'ọ': 'o', 'ỏ': 'o', 'õ': 'o',
+    'ô': 'o', 'ồ': 'o', 'ố': 'o', 'ộ': 'o', 'ổ': 'o', 'ỗ': 'o',
+    'ơ': 'o', 'ờ': 'o', 'ớ': 'o', 'ợ': 'o', 'ở': 'o', 'ỡ': 'o',
+    'ù': 'u', 'ú': 'u', 'ụ': 'u', 'ủ': 'u', 'ũ': 'u',
+    'ư': 'u', 'ừ': 'u', 'ứ': 'u', 'ự': 'u', 'ử': 'u', 'ữ': 'u',
+    'ỳ': 'y', 'ý': 'y', 'ỵ': 'y', 'ỷ': 'y', 'ỹ': 'y',
+    'đ': 'd'
+  };
+
+  return title
+    .toLowerCase()
+    .split('')
+    .map(char => vietnameseMap[char] || char)
+    .join('')
+    .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
+    .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .replace(/-+/g, '-') // Replace multiple hyphens with single
+    .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
+};
+
 export const formatDate = (dateString: string): string => {
   return new Intl.DateTimeFormat('vi-VN', {
     year: 'numeric',

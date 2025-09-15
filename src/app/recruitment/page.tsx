@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import RecruitmentPageClient from './RecruitmentPageClient';
+import { LoadingSpinner } from '../components/shared/LoadingSpinner';
 
 export const metadata: Metadata = {
   title: 'Tuyển dụng VinFast - VinFast Việt Hùng | Cơ hội nghề nghiệp xe điện',
@@ -17,5 +19,13 @@ export const metadata: Metadata = {
 };
 
 export default function RecruitmentPage() {
-  return <RecruitmentPageClient />;
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <LoadingSpinner size="lg" />
+      </div>
+    }>
+      <RecruitmentPageClient />
+    </Suspense>
+  );
 }

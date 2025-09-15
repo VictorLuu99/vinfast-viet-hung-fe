@@ -50,7 +50,7 @@ export const NewsCard = ({ article }: NewsCardProps) => {
 
         {/* Title */}
         <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 hover:text-blue-600 transition-colors">
-          <Link href={`/news/${article.id}`}>
+          <Link href={`/news/${article.slug}`}>
             {article.title}
           </Link>
         </h3>
@@ -64,7 +64,7 @@ export const NewsCard = ({ article }: NewsCardProps) => {
 
         {/* Read More Link */}
         <Link
-          href={`/news/${article.id}`}
+          href={`/news/${article.slug}`}
           className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium group"
         >
           Đọc thêm

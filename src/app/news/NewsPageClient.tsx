@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Header } from "../components/Header/Header";
 import { Footer } from "../components/Footer/Footer";
 import { HeroSection } from "../components/shared/HeroSection";
@@ -15,6 +16,9 @@ import { Newspaper, Filter } from "lucide-react";
 const ITEMS_PER_PAGE = 9;
 
 export default function NewsPageClient() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const [articles, setArticles] = useState<NewsArticle[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -24,6 +28,15 @@ export default function NewsPageClient() {
   const [totalPages, setTotalPages] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
+
+  // Sync with URL parameters
+  useEffect(() => {
+    const category = searchParams.get('category') || 'all';
+    const page = parseInt(searchParams.get('page') || '1');
+
+    setSelectedCategory(category);
+    setCurrentPage(page);
+  }, [searchParams]);
 
   // Fetch articles when filters change
   useEffect(() => {
@@ -76,13 +89,37 @@ export default function NewsPageClient() {
   );
 
   const handleCategoryChange = (category: string) => {
-    setSelectedCategory(category);
-    setCurrentPage(1);
+    const newSearchParams = new URLSearchParams(searchParams.toString());
+
+    if (category === 'all') {
+      newSearchParams.delete('category');
+    } else {
+      newSearchParams.set('category', category);
+    }
+
+    // Reset to page 1 when changing category
+    newSearchParams.delete('page');
+
+    const queryString = newSearchParams.toString();
+    const newPath = queryString ? `/news?${queryString}` : '/news';
+
+    router.push(newPath);
     setShowMobileFilters(false);
   };
 
   const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+    const newSearchParams = new URLSearchParams(searchParams.toString());
+
+    if (page === 1) {
+      newSearchParams.delete('page');
+    } else {
+      newSearchParams.set('page', page.toString());
+    }
+
+    const queryString = newSearchParams.toString();
+    const newPath = queryString ? `/news?${queryString}` : '/news';
+
+    router.push(newPath);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
