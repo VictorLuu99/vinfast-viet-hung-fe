@@ -54,6 +54,13 @@ export interface Job {
   created_at: string;
 }
 
+// Alias for Job interface to match component expectations
+export interface JobPosting extends Job {
+  job_type: string;
+  salary_range?: string;
+  status: string;
+}
+
 export interface JobCategory {
   id: number;
   name: string;
@@ -159,7 +166,7 @@ class ApiClient {
     limit?: number;
     department?: string;
     location?: string;
-  } = {}): Promise<ApiResponse<Job[]>> {
+  } = {}): Promise<ApiResponse<JobPosting[]>> {
     const searchParams = new URLSearchParams();
     if (params.page) searchParams.append('page', params.page.toString());
     if (params.limit) searchParams.append('limit', params.limit.toString());
@@ -169,7 +176,7 @@ class ApiClient {
     return this.request(`/api/recruitment/jobs?${searchParams}`);
   }
 
-  async getJob(id: string): Promise<ApiResponse<Job>> {
+  async getJob(id: string): Promise<ApiResponse<JobPosting>> {
     return this.request(`/api/recruitment/jobs/${id}`);
   }
 
@@ -178,12 +185,13 @@ class ApiClient {
   }
 
   async submitJobApplication(
-    jobId: string,
-    application: JobApplication
+    formData: FormData
   ): Promise<ApiResponse<{ application_id: number; message: string }>> {
+    const jobId = formData.get('jobId') as string;
     return this.request(`/api/recruitment/jobs/${jobId}/apply`, {
       method: 'POST',
-      body: JSON.stringify(application),
+      body: formData,
+      headers: {}, // Let browser set Content-Type for FormData
     });
   }
 
