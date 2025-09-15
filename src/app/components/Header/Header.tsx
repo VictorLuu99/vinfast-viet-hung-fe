@@ -15,8 +15,8 @@ export const Header = () => {
 
   const navigationItems = [
     { href: '/', label: "Trang chủ" },
-    { href: '/#products', label: "Sản phẩm" },
     { href: '/#stores', label: "Cửa hàng" },
+    { href: '/products', label: "Sản phẩm" },
     { href: '/about', label: "Giới thiệu" },
     { href: '/policy', label: "Chính sách" },
     { href: '/news', label: "Tin tức" },

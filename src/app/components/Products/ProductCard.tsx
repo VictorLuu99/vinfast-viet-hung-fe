@@ -1,14 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Product } from '@/types/product';
+import { Product } from '@/lib/api';
 import { contactInfo } from '@/lib/data/stores';
-import { Zap, MapPin, Shield, Battery } from 'lucide-react';
+import { Zap, Battery, Gauge, Clock, Award, MapPin, Shield } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
+  viewMode?: 'grid' | 'list';
 }
 
-export const ProductCard = ({ product }: ProductCardProps) => {
+export const ProductCard = ({ product, viewMode = 'grid' }: ProductCardProps) => {
   return (
     <div className="group bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-blue-200 transform hover:-translate-y-1 sm:hover:-translate-y-2">
       {/* Image Section */}
@@ -44,7 +45,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
           <div className="p-3 sm:p-4 w-full">
             <Link 
-              href={`/products/${product.id}`}
+              href={`/products/${product.slug}`}
               className="w-full bg-white text-gray-900 font-semibold py-2 px-3 sm:px-4 text-sm sm:text-base rounded-lg hover:bg-gray-50 transition-colors duration-200 block text-center"
             >
               Xem chi tiết
@@ -75,13 +76,13 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           </div> */}
           
           <div className="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-            {product.priceFormatted}
+            {product.price_formatted}
           </div>
         </div>
         
         {/* Specs */}
         <p className="text-gray-600 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed line-clamp-2">
-          {product.specs}
+          {product.description || product.tagline || 'Xe máy điện VinFast chất lượng cao'}
         </p>
         
         {/* Features */}
@@ -98,15 +99,15 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-4 sm:mb-6">
           <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-500">
             <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500 flex-shrink-0" />
-            <span className="font-medium truncate">{product.range}km</span>
+            <span className="font-medium truncate">{product.range_km}km</span>
           </div>
           <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-500">
             <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-green-500 flex-shrink-0" />
-            <span className="font-medium truncate">{product.maxSpeed}km/h</span>
+            <span className="font-medium truncate">{product.max_speed_kmh}km/h</span>
           </div>
           <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-500">
             <Battery className="w-3 h-3 sm:w-4 sm:h-4 text-purple-500 flex-shrink-0" />
-            <span className="font-medium truncate">{product.battery}</span>
+            <span className="font-medium truncate">{product.battery_capacity || product.battery_type || 'Pin LFP'}</span>
           </div>
           <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-500">
             <Shield className="w-3 h-3 sm:w-4 sm:h-4 text-orange-500 flex-shrink-0" />
@@ -117,7 +118,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         {/* Action Buttons */}
         <div className="space-y-3">
           <Link 
-            href={`/products/${product.id}`}
+            href={`/products/${product.slug}`}
             className="w-full bg-white text-gray-900 font-semibold py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base rounded-lg sm:rounded-xl border-2 border-gray-300 hover:border-blue-500 hover:text-blue-600 transition-all duration-300 text-center block"
           >
             Xem chi tiết

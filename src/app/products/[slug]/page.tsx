@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getProductById, getProductsByCategory, products } from '@/lib/data/products';
+import { apiClient, Product } from '@/lib/api';
 import { contactInfo } from '@/lib/data/stores';
 import { Zap, MapPin, Shield, Battery, Clock, ArrowLeft, Home, ChevronRight, CheckCircle, Phone } from 'lucide-react';
 import Link from 'next/link';
@@ -7,36 +7,71 @@ import { ProductCard } from '@/app/components/Products/ProductCard';
 import ProductDetailClient from './ProductDetailClient';
 
 export async function generateStaticParams() {
-  return products.map((product) => ({
-    id: product.id,
-  }));
+  try {
+    const response = await apiClient.getProducts({ limit: 100 });
+    if (response.success && response.data) {
+      return response.data.map((product: Product) => ({
+        slug: product.slug,
+      }));
+    }
+  } catch (error) {
+    console.error('Error generating static params:', error);
+  }
+  return [];
 }
 
 interface ProductDetailPageProps {
   params: Promise<{
-    id: string;
+    slug: string;
   }>;
 }
 
 export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
   const resolvedParams = await params;
-  const product = getProductById(resolvedParams.id);
+
+  let product: Product | null = null;
+  let relatedProducts: Product[] = [];
+
+  try {
+    const response = await apiClient.getProduct(resolvedParams.slug);
+    if (response.success && response.data) {
+      product = response.data;
+
+      // Get related products from the same category
+      const relatedResponse = await apiClient.getProducts({
+        category: product.category,
+        limit: 4
+      });
+      if (relatedResponse.success && relatedResponse.data) {
+        relatedProducts = relatedResponse.data
+          .filter(p => p.id !== product!.id)
+          .slice(0, 3);
+      }
+    }
+  } catch (error) {
+    console.error('Error fetching product:', error);
+  }
 
   if (!product) {
     notFound();
   }
 
-  // Get related products from the same category
-  const relatedProducts = getProductsByCategory(product.category)
-    .filter(p => p.id !== product.id)
-    .slice(0, 3);
+  // Map category to Vietnamese
+  const getCategoryLabel = (category: string) => {
+    switch (category) {
+      case 'cao-cap': return 'Cao cấp';
+      case 'trung-cap': return 'Trung cấp';
+      case 'pho-thong': return 'Phổ thông';
+      default: return category;
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white shadow-sm border-b">
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <Link 
+          <Link
             href="/"
             className="inline-flex items-center text-gray-600 hover:text-blue-600 transition-colors duration-200"
           >
@@ -54,7 +89,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             Trang chủ
           </Link>
           <ChevronRight className="w-4 h-4" />
-          <Link href="/#products" className="hover:text-blue-600 transition-colors duration-200">
+          <Link href="/products" className="hover:text-blue-600 transition-colors duration-200">
             Sản phẩm
           </Link>
           <ChevronRight className="w-4 h-4" />
@@ -70,9 +105,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             {/* Title and Category */}
             <div>
               <div className="text-sm text-blue-600 font-medium mb-2">
-                {product.category === 'cao-cap' && 'Cao cấp'}
-                {product.category === 'trung-cap' && 'Trung cấp'}
-                {product.category === 'pho-thong' && 'Phổ thông'}
+                {getCategoryLabel(product.category)}
               </div>
               <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                 {product.name}
@@ -83,26 +116,26 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
                 </p>
               )}
               <p className="text-lg text-gray-600 leading-relaxed">
-                {product.specs}
+                {product.description || 'Xe máy điện VinFast chất lượng cao với công nghệ tiên tiến'}
               </p>
             </div>
 
             {/* Price */}
             <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-2xl border border-blue-100">
               <div className="flex items-center gap-4 mb-3">
-                {/* {product.originalPrice && product.originalPriceFormatted && (
+                {product.original_price_formatted && (
                   <div className="text-xl text-gray-400 line-through">
-                    {product.originalPriceFormatted}
+                    {product.original_price_formatted}
                   </div>
                 )}
-                {product.discount && (
+                {product.discount && product.discount > 0 && (
                   <div className="text-lg text-red-500 font-semibold">
                     (-{product.discount}%)
                   </div>
-                )} */}
+                )}
               </div>
               <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                {product.priceFormatted}
+                {product.price_formatted}
               </div>
               <p className="text-sm text-gray-600 mt-2">
                 Giá đã bao gồm VAT, 1 pin và 1 bộ sạc
@@ -131,34 +164,38 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
                     <Zap className="w-5 h-5 text-blue-600" />
                     <span className="text-sm text-blue-700 font-medium">Tầm hoạt động</span>
                   </div>
-                  <div className="text-xl font-bold text-blue-900">{product.range} km</div>
+                  <div className="text-xl font-bold text-blue-900">{product.range_km} km</div>
                   <div className="text-xs text-blue-600 mt-1">1 lần sạc</div>
                 </div>
-                
+
                 <div className="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-xl border border-green-200">
                   <div className="flex items-center gap-3 mb-2">
                     <MapPin className="w-5 h-5 text-green-600" />
                     <span className="text-sm text-green-700 font-medium">Tốc độ tối đa</span>
                   </div>
-                  <div className="text-xl font-bold text-green-900">{product.maxSpeed} km/h</div>
+                  <div className="text-xl font-bold text-green-900">{product.max_speed_kmh} km/h</div>
                   <div className="text-xs text-green-600 mt-1">Vận hành êm ái</div>
                 </div>
-                
+
                 <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-xl border border-purple-200">
                   <div className="flex items-center gap-3 mb-2">
                     <Battery className="w-5 h-5 text-purple-600" />
                     <span className="text-sm text-purple-700 font-medium">Pin</span>
                   </div>
-                  <div className="text-lg font-bold text-purple-900">{product.battery}</div>
+                  <div className="text-lg font-bold text-purple-900">
+                    {product.battery_capacity || product.battery_type || 'Pin LFP'}
+                  </div>
                   <div className="text-xs text-purple-600 mt-1">Công nghệ tiên tiến</div>
                 </div>
-                
+
                 <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-4 rounded-xl border border-orange-200">
                   <div className="flex items-center gap-3 mb-2">
                     <Clock className="w-5 h-5 text-orange-600" />
                     <span className="text-sm text-orange-700 font-medium">Thời gian sạc</span>
                   </div>
-                  <div className="text-lg font-bold text-orange-900">{product.chargingTime}</div>
+                  <div className="text-lg font-bold text-orange-900">
+                    {product.charging_time || '4-6 giờ'}
+                  </div>
                   <div className="text-xs text-orange-600 mt-1">Sạc nhanh</div>
                 </div>
               </div>
@@ -167,7 +204,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             {/* CTA Buttons */}
             <div className="space-y-3">
               {contactInfo.socialMedia?.facebook ? (
-                <a 
+                <a
                   href={contactInfo.socialMedia.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -180,7 +217,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
                   Liên hệ tư vấn ngay
                 </button>
               )}
-              
+
               <button className="w-full bg-white text-gray-900 font-semibold py-4 px-6 text-lg rounded-xl border-2 border-gray-300 hover:border-blue-500 hover:text-blue-600 transition-all duration-300">
                 Đặt lịch lái thử
               </button>
@@ -188,12 +225,10 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
           </div>
         </div>
 
-        {/* Interactive tabs are now handled by ProductDetailClient component */}
-
         {/* Additional Information */}
         <div className="mt-16">
           <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">Tại sao chọn {product.name}?</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
               <div className="flex items-center gap-4 mb-4">
@@ -220,7 +255,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
                 </li>
               </ul>
             </div>
-            
+
             <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
@@ -234,11 +269,11 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               <ul className="mt-4 space-y-2 text-sm text-gray-600">
                 <li className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-green-500" />
-                  Hệ thống phanh ABS
+                  {product.brake_system || 'Hệ thống phanh ABS'}
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-green-500" />
-                  Đèn LED chiếu sáng toàn bộ
+                  {product.lighting || 'Đèn LED chiếu sáng toàn bộ'}
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-green-500" />
@@ -246,7 +281,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
                 </li>
               </ul>
             </div>
-            
+
             <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
@@ -260,7 +295,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               <ul className="mt-4 space-y-2 text-sm text-gray-600">
                 <li className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-green-500" />
-                  Bảo hành {product.warranty}
+                  Bảo hành {product.warranty || '2 năm'}
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-green-500" />
@@ -282,7 +317,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
               {contactInfo.socialMedia?.facebook ? (
-                <a 
+                <a
                   href={contactInfo.socialMedia.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -312,13 +347,13 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               Sản phẩm tương tự
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {relatedProducts.map((relatedProduct: any) => (
+              {relatedProducts.map((relatedProduct) => (
                 <ProductCard key={relatedProduct.id} product={relatedProduct} />
               ))}
             </div>
           </div>
         )}
-        
+
         {/* SEO Content */}
         <div className="mt-16 bg-white p-8 rounded-2xl shadow-sm border border-gray-200">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">
@@ -326,19 +361,19 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
           </h2>
           <div className="prose max-w-none text-gray-600">
             <p className="mb-4">
-              <strong>{product.name}</strong> là một trong những mẫu xe máy điện {product.category === 'cao-cap' ? 'cao cấp' : product.category === 'trung-cap' ? 'trung cấp' : 'phổ thông'} 
-              được ưa chuộng nhất của VinFast. Với thiết kế hiện đại, công nghệ tiên tiến và hiệu suất vượt trội, 
+              <strong>{product.name}</strong> là một trong những mẫu xe máy điện {getCategoryLabel(product.category).toLowerCase()}
+              được ưa chuộng nhất của VinFast. Với thiết kế hiện đại, công nghệ tiên tiến và hiệu suất vượt trội,
               {product.name} hứa hẹn mang đến trải nghiệm di chuyển tuyệt vời cho người dùng.
             </p>
             <p className="mb-4">
-              Điểm nổi bật của {product.name} chính là khả năng di chuyển {product.range}km với một lần sạc, 
-              tốc độ tối đa {product.maxSpeed}km/h và thời gian sạc chỉ {product.chargingTime}. 
+              Điểm nổi bật của {product.name} chính là khả năng di chuyển {product.range_km}km với một lần sạc,
+              tốc độ tối đa {product.max_speed_kmh}km/h và thời gian sạc chỉ {product.charging_time || '4-6 giờ'}.
               Đây là những thông số ấn tượng trong phân khúc xe máy điện hiện tại.
             </p>
             <p>
-              Với mức giá {product.priceFormatted}, {product.name} được đánh giá có tỷ lệ giá/chất lượng tốt, 
-              phù hợp với nhu cầu di chuyển hàng ngày của người dùng Việt Nam. 
-              Sản phẩm được bảo hành chính hãng {product.warranty} cùng dịch vụ hỗ trợ 24/7.
+              Với mức giá {product.price_formatted}, {product.name} được đánh giá có tỷ lệ giá/chất lượng tốt,
+              phù hợp với nhu cầu di chuyển hàng ngày của người dùng Việt Nam.
+              Sản phẩm được bảo hành chính hãng {product.warranty || '2 năm'} cùng dịch vụ hỗ trợ 24/7.
             </p>
           </div>
         </div>

@@ -104,6 +104,63 @@ export interface ContactSubmission {
   message: string;
 }
 
+// Product Types - Electric Motorbikes
+export interface Product {
+  id: number;
+  name: string;
+  slug: string;
+  category: 'cao-cap' | 'trung-cap' | 'pho-thong';
+  price: number;
+  original_price?: number;
+  price_formatted: string;
+  original_price_formatted?: string;
+  discount: number;
+  description?: string;
+  tagline?: string;
+  features: string[];
+  specs?: any;
+  color_variants: Record<string, string[]>; // Color name -> array of image URLs
+  colors: string[];
+  default_color?: string;
+  range_km: number;
+  power_w: number;
+  battery_type?: string;
+  battery_capacity?: string;
+  weight_kg: number;
+  max_speed_kmh: number;
+  charging_time?: string;
+  motor_type?: string;
+  brake_system?: string;
+  lighting?: string;
+  display?: string;
+  water_resistance?: string;
+  suspension?: string;
+  wheel_size?: string;
+  storage_liters: number;
+  warranty?: string;
+  length_mm?: number;
+  width_mm?: number;
+  height_mm?: number;
+  available: boolean;
+  status: string;
+  priority: number;
+  badge?: string;
+  meta_title?: string;
+  meta_description?: string;
+  keywords?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ProductCategory {
+  id: number;
+  name: string;
+  slug: string;
+  display_name: string;
+  description?: string;
+  sort_order: number;
+}
+
 // API Client Class
 class ApiClient {
   private baseUrl: string;
@@ -216,6 +273,40 @@ class ApiClient {
       body: JSON.stringify(contact),
     });
   }
+
+  // Products API methods - Electric Motorbikes
+  async getProducts(params: {
+    page?: number;
+    limit?: number;
+    category?: string;
+    search?: string;
+    min_price?: number;
+    max_price?: number;
+    sort?: string;
+    order?: string;
+    color?: string;
+  } = {}): Promise<ApiResponse<Product[]>> {
+    const searchParams = new URLSearchParams();
+    if (params.page) searchParams.append('page', params.page.toString());
+    if (params.limit) searchParams.append('limit', params.limit.toString());
+    if (params.category) searchParams.append('category', params.category);
+    if (params.search) searchParams.append('search', params.search);
+    if (params.min_price) searchParams.append('min_price', params.min_price.toString());
+    if (params.max_price) searchParams.append('max_price', params.max_price.toString());
+    if (params.sort) searchParams.append('sort', params.sort);
+    if (params.order) searchParams.append('order', params.order);
+    if (params.color) searchParams.append('color', params.color);
+
+    return this.request(`/api/products?${searchParams}`);
+  }
+
+  async getProduct(slug: string): Promise<ApiResponse<Product>> {
+    return this.request(`/api/products/by-slug/${slug}`);
+  }
+
+  async getProductCategories(): Promise<ApiResponse<ProductCategory[]>> {
+    return this.request('/api/products/categories');
+  }
 }
 
 // Export singleton instance
@@ -304,3 +395,16 @@ export const experienceLevels = [
   { value: 'senior', label: '5-10 năm' },
   { value: 'lead', label: 'Trên 10 năm' }
 ];
+
+export const vietnameseProductCategories = [
+  { value: 'cao-cap', label: 'Cao cấp' },
+  { value: 'trung-cap', label: 'Trung cấp' },
+  { value: 'pho-thong', label: 'Phổ thông' }
+];
+
+export const formatPrice = (price: number): string => {
+  return new Intl.NumberFormat('vi-VN', {
+    style: 'currency',
+    currency: 'VND'
+  }).format(price);
+};
