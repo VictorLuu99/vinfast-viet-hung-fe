@@ -10,6 +10,7 @@ import { LoadingSpinner } from "../../components/shared/LoadingSpinner";
 import {
   apiClient,
   Product,
+  normalizeProductData,
 } from "@/lib/api";
 import {
   ArrowLeft,
@@ -51,7 +52,7 @@ export default function ProductDetailClient() {
       const response = await apiClient.getProduct(productSlug);
 
       if (response.success && response.data) {
-        const productData = response.data;
+        const productData = normalizeProductData(response.data);
         setProduct(productData);
         // Set initial color selection
         setSelectedColor(
@@ -129,7 +130,11 @@ export default function ProductDetailClient() {
   const getCurrentImages = (): string[] => {
     if (!product) return ['/api/placeholder/800/600'];
 
-    if (selectedColor && product.color_variants && product.color_variants[selectedColor]) {
+    if (selectedColor &&
+        product.color_variants &&
+        typeof product.color_variants === 'object' &&
+        product.color_variants[selectedColor] &&
+        Array.isArray(product.color_variants[selectedColor])) {
       return product.color_variants[selectedColor];
     }
     // Fallback to main product image or placeholder
@@ -147,19 +152,19 @@ export default function ProductDetailClient() {
   // Get color CSS classes for visual representation
   const getColorClass = (colorName: string) => {
     const colorMap: Record<string, string> = {
-      'Hồng': 'bg-pink-400',
-      'Đen': 'bg-gray-900',
-      'Trắng': 'bg-gray-100 border-gray-300',
-      'Đỏ': 'bg-red-500',
-      'Vàng': 'bg-yellow-400',
-      'Đỏ Tươi': 'bg-red-500',
-      'Đen Nhám': 'bg-gray-800',
-      'Xanh Tím Than': 'bg-indigo-600',
-      'Trắng Ngọc Trai': 'bg-gray-50 border-gray-300',
-      'Xanh Rêu': 'bg-green-600',
-      'Xanh Dương': 'bg-blue-500',
-      'Xám': 'bg-gray-500',
-      'Bạc': 'bg-gray-300',
+      'hồng': 'bg-pink-400',
+      'đen': 'bg-gray-900',
+      'trắng': 'bg-gray-100 border-gray-300',
+      'đỏ': 'bg-red-500',
+      'vàng': 'bg-yellow-400',
+      'đỏ tươi': 'bg-red-500',
+      'đen nhám': 'bg-gray-800',
+      'xanh tím than': 'bg-indigo-600',
+      'trắng ngọc trai': 'bg-gray-50 border-gray-300',
+      'xanh rêu': 'bg-green-600',
+      'xanh dương': 'bg-blue-500',
+      'xám': 'bg-gray-500',
+      'bạc': 'bg-gray-300',
     };
     return colorMap[colorName] || 'bg-gray-400';
   };
@@ -357,13 +362,17 @@ export default function ProductDetailClient() {
                   )}
 
                   {/* Color Selection */}
-                  {product.colors && product.colors.length > 0 && (
+                  {Array.isArray(product.colors) && product.colors.length > 0 && (
                     <div className="space-y-4">
                       <h4 className="text-lg font-semibold text-gray-900">Tùy chọn màu sắc</h4>
                       <div className="flex flex-wrap gap-4">
                         {product.colors.map((color: string, index: number) => {
                           const isSelected = selectedColor === color;
-                          const hasColorImages = product.color_variants && product.color_variants[color] && product.color_variants[color].length > 0;
+                          const hasColorImages = product.color_variants &&
+                            typeof product.color_variants === 'object' &&
+                            product.color_variants[color] &&
+                            Array.isArray(product.color_variants[color]) &&
+                            product.color_variants[color].length > 0;
 
                           return (
                             <div key={index} className="text-center group cursor-pointer" onClick={() => handleColorSelect(color)}>
@@ -372,9 +381,9 @@ export default function ProductDetailClient() {
                                   ? 'border-blue-500 ring-4 ring-blue-200 scale-110'
                                   : 'border-gray-200 hover:border-gray-300 hover:scale-105'
                               } ${
-                                getColorClass(color)
-                              } ${color.includes('Trắng') ? 'border' : ''}`}>
-                                {color.includes('Trắng') && (
+                                getColorClass(color.toLocaleLowerCase())
+                              } ${color.includes('trắng') ? 'border' : ''}`}>
+                                {color.includes('trắng') && (
                                   <div className="w-full h-full rounded-full bg-white opacity-90"></div>
                                 )}
                                 {/* Indicator for colors with specific images */}
@@ -399,7 +408,10 @@ export default function ProductDetailClient() {
                       {selectedColor && (
                         <div className="text-sm text-gray-600 bg-blue-50 p-3 rounded-lg">
                           <span className="font-medium">Màu đã chọn:</span> {selectedColor}
-                          {product.color_variants && product.color_variants[selectedColor] && (
+                          {product.color_variants &&
+                            typeof product.color_variants === 'object' &&
+                            product.color_variants[selectedColor] &&
+                            Array.isArray(product.color_variants[selectedColor]) && (
                             <span className="ml-2">• {product.color_variants[selectedColor].length} hình ảnh</span>
                           )}
                         </div>
@@ -538,7 +550,7 @@ export default function ProductDetailClient() {
                       <div className="space-y-6">
                         <h3 className="text-xl font-semibold text-gray-900">Tính năng nổi bật</h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          {product.features.map((feature: string, index: number) => (
+                          {Array.isArray(product.features) && product.features.map((feature: string, index: number) => (
                             <div key={index} className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
                               <CheckCircle className="w-6 h-6 text-green-500 mt-1 flex-shrink-0" />
                               <div>

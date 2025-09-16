@@ -408,3 +408,26 @@ export const formatPrice = (price: number): string => {
     currency: 'VND'
   }).format(price);
 };
+
+// Utility function to safely parse JSON string arrays/objects
+export const safeJsonParse = <T>(value: any, fallback: T): T => {
+  if (typeof value === 'string') {
+    try {
+      return JSON.parse(value);
+    } catch (error) {
+      console.warn('Failed to parse JSON:', value, error);
+      return fallback;
+    }
+  }
+  return value || fallback;
+};
+
+// Normalize Product data from API response
+export const normalizeProductData = (product: Product): Product => {
+  return {
+    ...product,
+    colors: safeJsonParse(product.colors, [] as string[]),
+    features: safeJsonParse(product.features, [] as string[]),
+    color_variants: safeJsonParse(product.color_variants, {} as Record<string, string[]>),
+  };
+};
