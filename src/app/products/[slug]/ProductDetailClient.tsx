@@ -128,17 +128,21 @@ export default function ProductDetailClient() {
 
   // Get the current images based on selected color
   const getCurrentImages = (): string[] => {
-    if (!product) return ['/api/placeholder/800/600'];
+    if (!product) {
+      return [
+      ];
+    }
 
+    // If color variants exist and selected color has images
     if (selectedColor &&
         product.color_variants &&
         typeof product.color_variants === 'object' &&
         product.color_variants[selectedColor] &&
-        Array.isArray(product.color_variants[selectedColor])) {
+        Array.isArray(product.color_variants[selectedColor]) &&
+        product.color_variants[selectedColor].length > 0) {
       return product.color_variants[selectedColor];
     }
-    // Fallback to main product image or placeholder
-    return ['/api/placeholder/800/600'];
+    return []
   };
 
   const allImages = getCurrentImages();
@@ -285,13 +289,13 @@ export default function ProductDetailClient() {
                 <div className="space-y-4">
                   {/* Main Image Display */}
                   <div className="relative overflow-hidden rounded-2xl shadow-xl bg-white">
-                    <div className="aspect-w-16 aspect-h-12 bg-gray-100">
+                    <div className="relative w-full h-80 lg:h-[500px] bg-gradient-to-br from-blue-50 to-green-50">
                       <Image
-                        src={allImages[selectedImageIndex] || '/api/placeholder/800/600'}
+                        src={allImages[selectedImageIndex]}
                         alt={`${product.name}${selectedColor ? ` - ${selectedColor}` : ''}`}
-                        width={800}
-                        height={600}
-                        className="w-full h-80 lg:h-96 object-cover"
+                        fill
+                        className="object-contain object-center"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         priority
                       />
                     </div>
@@ -345,16 +349,16 @@ export default function ProductDetailClient() {
                         <button
                           key={index}
                           onClick={() => setSelectedImageIndex(index)}
-                          className={`relative flex-shrink-0 w-20 h-16 rounded-lg overflow-hidden border-2 transition-all ${
-                            selectedImageIndex === index ? 'border-blue-500 scale-105' : 'border-gray-200 hover:border-gray-300'
+                          className={`relative flex-shrink-0 w-24 h-20 lg:w-28 lg:h-24 rounded-lg overflow-hidden border-2 transition-all ${
+                            selectedImageIndex === index ? 'border-blue-500 scale-105 ring-2 ring-blue-200' : 'border-gray-200 hover:border-gray-300'
                           }`}
                         >
                           <Image
-                            src={imageUrl || '/api/placeholder/80/64'}
+                            src={imageUrl}
                             alt={`${product.name} - Ảnh ${index + 1}`}
-                            width={80}
-                            height={64}
-                            className="w-full h-full object-cover"
+                            fill
+                            className="object-contain object-center"
+                            sizes="(max-width: 768px) 96px, 112px"
                           />
                         </button>
                       ))}
