@@ -136,10 +136,10 @@ export default function NewsPageClient() {
       <Header />
       <div className="min-h-screen bg-gray-50 pt-20">
         {/* Hero Section */}
-        <HeroSection
+        {/* <HeroSection
           title="Tin tức VinFast"
           description="Cập nhật tin tức mới nhất về VinFast và thị trường xe điện tại Việt Nam"
-        />
+        /> */}
 
         {/* Main Content */}
         <section className="py-16 bg-gray-50">

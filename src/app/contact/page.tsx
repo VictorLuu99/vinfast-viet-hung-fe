@@ -27,10 +27,10 @@ export default function ContactPage() {
       <Header />
       <div className="min-h-screen bg-gray-50 pt-20">
       {/* Hero Section */}
-      <HeroSection
+      {/* <HeroSection
         title="Liên hệ với chúng tôi"
         description="VinFast Việt Hùng luôn sẵn sàng hỗ trợ và tư vấn mọi thắc mắc của bạn về xe điện VinFast"
-      />
+      /> */}
 
       {/* Quick Contact Info */}
       <ContactSection />

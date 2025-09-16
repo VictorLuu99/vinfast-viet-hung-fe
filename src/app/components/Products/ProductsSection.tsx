@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { products, productCategories } from '@/lib/data/products';
 import { contactInfo } from '@/lib/data/stores';
-import { ProductCard } from './ProductCard';
+import { ProductCardHome } from './ProductCardHome';
 import { CategoryFilter } from './CategoryFilter';
 import { Sparkles, Zap, Star, MessageCircle } from 'lucide-react';
 
@@ -73,7 +73,7 @@ export const ProductsSection = () => {
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
           {filteredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCardHome key={product.id} product={product} />
           ))}
         </div>
 

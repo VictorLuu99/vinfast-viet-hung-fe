@@ -138,10 +138,10 @@ export default function RecruitmentPageClient() {
       <Header />
       <div className="min-h-screen bg-gray-50 pt-20">
         {/* Hero Section */}
-        <HeroSection
+        {/* <HeroSection
           title="Tuyển dụng VinFast"
           description="Gia nhập đội ngũ VinFast Việt Hùng - Cùng phát triển sự nghiệp trong ngành ô tô điện tương lai"
-        />
+        /> */}
 
         {/* Main Content */}
         <section className="py-16 bg-gray-50">

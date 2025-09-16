@@ -86,6 +86,17 @@ export const ContactSection = () => {
                   <FacebookIcon size={24} />
                 </a>
               )}
+               {contactInfo.socialMedia.facebook2 && (
+                <a 
+                  href={contactInfo.socialMedia.facebook2}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-colors duration-200 transform hover:scale-110 hover:shadow-lg"
+                  aria-label="Facebook"
+                >
+                  <FacebookIcon size={24} />
+                </a>
+              )}
               
               {contactInfo.socialMedia.zalo && (
                 <a 
@@ -99,7 +110,7 @@ export const ContactSection = () => {
                 </a>
               )}
               
-              {contactInfo.socialMedia.youtube && (
+              {/* {contactInfo.socialMedia.youtube && (
                 <a 
                   href={contactInfo.socialMedia.youtube}
                   target="_blank"
@@ -109,7 +120,7 @@ export const ContactSection = () => {
                 >
                   <YouTubeIcon size={24} />
                 </a>
-              )}
+              )} */}
             </div>
           </div>
         )}

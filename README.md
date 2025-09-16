@@ -247,7 +247,7 @@ This project is licensed under the MIT License.
 
 For support and questions:
 - **Hotline**: 086.266.9588
-- **Email**: info@vinfast-viethung.vn
+- **Email**: vinfastviethung@gmail.com
 - **Website**: [vinfastviethung.vn](https://vinfastviethung.vn)
 
 ---

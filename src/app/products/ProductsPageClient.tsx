@@ -183,10 +183,10 @@ export default function ProductsPageClient() {
       <Header />
       <div className="min-h-screen bg-gray-50 pt-20">
         {/* Hero Section */}
-        <HeroSection
+        {/* <HeroSection
           title="Sản phẩm VinFast"
           description="Khám phá bộ sưu tập xe máy điện VinFast chính hãng - Công nghệ tiên tiến, thiết kế hiện đại, trải nghiệm tuyệt vời"
-        />
+        /> */}
 
         {/* Main Content */}
         <section className="py-16 bg-gray-50">

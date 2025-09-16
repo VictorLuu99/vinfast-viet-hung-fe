@@ -9,10 +9,10 @@ export default function PolicyPage() {
       <Header />
       <div className="min-h-screen bg-gray-50 pt-20">
         {/* Hero Section */}
-        <HeroSection
+        {/* <HeroSection
           title="Chính sách"
           description="Chính sách dịch vụ khách hàng của VinFast Việt Hùng"
-        />
+        /> */}
 
         {/* Policies Content */}
         <div className="container mx-auto px-4 py-16">
@@ -42,7 +42,7 @@ export default function PolicyPage() {
 
                 <h3 className="text-2xl font-semibold text-gray-800 mb-4">Quy trình đổi trả:</h3>
                 <ol className="list-decimal pl-6 mb-6 space-y-2">
-                  <li><strong>Bước 1:</strong> Khách hàng liên hệ với <strong>Nhà phân phối Việt Hùng</strong> qua số điện thoại <strong>086.266.9588</strong> hoặc email <strong>info@vinfast-viethung.vn</strong> trong vòng 7 ngày kể từ khi nhận xe để thông báo về việc yêu cầu đổi trả.</li>
+                  <li><strong>Bước 1:</strong> Khách hàng liên hệ với <strong>Nhà phân phối Việt Hùng</strong> qua số điện thoại <strong>086.266.9588</strong> hoặc email <strong>vinfastviethung@gmail.com</strong> trong vòng 7 ngày kể từ khi nhận xe để thông báo về việc yêu cầu đổi trả.</li>
                   <li><strong>Bước 2:</strong> Cung cấp các thông tin cần thiết như số hóa đơn, phiếu bảo hành, và tình trạng sản phẩm. Chúng tôi sẽ kiểm tra thông tin và xác nhận yêu cầu đổi trả.</li>
                   <li><strong>Bước 3:</strong> Sau khi xác nhận, khách hàng sẽ đưa sản phẩm đến <strong>cửa hàng Việt Hùng</strong> hoặc yêu cầu chúng tôi gửi nhân viên đến tận nơi để kiểm tra sản phẩm.</li>
                   <li><strong>Bước 4:</strong> Nếu sản phẩm đáp ứng đủ các điều kiện đổi trả, khách hàng sẽ được <strong>đổi xe mới</strong> hoặc nhận <strong>hoàn tiền</strong> theo giá trị của sản phẩm (trừ các chi phí phát sinh như phí vận chuyển, bảo dưỡng nếu có).</li>
@@ -70,7 +70,7 @@ export default function PolicyPage() {
 
                 <p className="text-gray-600 mb-4">
                   Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ với chúng tôi qua số điện thoại <strong>086.266.9588</strong> 
-                  hoặc email <strong>info@vinfast-viethung.vn</strong>. Chúng tôi luôn sẵn sàng hỗ trợ bạn!
+                  hoặc email <strong>vinfastviethung@gmail.com</strong>. Chúng tôi luôn sẵn sàng hỗ trợ bạn!
                 </p>
                 <p className="text-gray-600 font-semibold">Trân trọng cảm ơn sự tin tưởng của quý khách!</p>
               </div>
@@ -83,11 +83,34 @@ export default function PolicyPage() {
               </h2>
               <div className="prose prose-lg max-w-none">
                 <h3 className="text-2xl font-semibold text-gray-800 mb-4">Thời gian bảo hành:</h3>
-                <ul className="list-disc pl-6 mb-6 space-y-2">
-                  <li><strong>Xe cao cấp:</strong> Bảo hành 3 năm</li>
-                  <li><strong>Xe trung cấp:</strong> Bảo hành 2 năm</li>
-                  <li><strong>Xe phổ thông:</strong> Bảo hành 2 năm (Motio: 1 năm)</li>
-                </ul>
+
+                {/* Warranty Images */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                  <div className="text-center">
+                    <img
+                      src="/images/policy/chinhsachbaohanhxe1.jpg"
+                      alt="Bảo hành xe 6 năm - VinFast"
+                      className="w-full h-auto rounded-lg shadow-md mb-4"
+                    />
+                    <div className="rounded p-1 inline-block">
+                      <p className="text-s font-semibold text-blue-800">
+                        <strong>Xe:</strong> Bảo hành 6 năm
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <img
+                      src="/images/policy/chinhsachbaohanhpin1.jpg"
+                      alt="Bảo hành pin 8 năm - VinFast"
+                      className="w-full h-auto rounded-lg shadow-md mb-4"
+                    />
+                    <div className="rounded p-1 inline-block">
+                      <p className="text-s font-semibold text-green-800">
+                        <strong>Pin:</strong> Bảo hành 8 năm
+                      </p>
+                    </div>
+                  </div>
+                </div>
 
                 <h3 className="text-2xl font-semibold text-gray-800 mb-4">Phạm vi bảo hành:</h3>
                 <ul className="list-disc pl-6 mb-6 space-y-2">
@@ -118,7 +141,7 @@ export default function PolicyPage() {
                 <ul className="list-disc pl-6 mb-6 space-y-2">
                   <li>Thanh toán tiền mặt</li>
                   <li>Chuyển khoản ngân hàng</li>
-                  <li>Trả góp 0% lãi suất (áp dụng có điều kiện)</li>
+                  <li>Hỗ trợ trả góp từ 0 đồng</li>
                   <li>Thẻ tín dụng</li>
                 </ul>
 
@@ -184,7 +207,7 @@ export default function PolicyPage() {
                 <h3 className="text-2xl font-semibold text-gray-800 mb-4">Tiếp nhận khiếu nại:</h3>
                 <ul className="list-disc pl-6 mb-6 space-y-2">
                   <li>Hotline: <strong>086.266.9588</strong></li>
-                  <li>Email: <strong>info@vinfast-viethung.vn</strong></li>
+                  <li>Email: <strong>vinfastviethung@gmail.com</strong></li>
                   <li>Trực tiếp tại cửa hàng</li>
                   <li>Fanpage Facebook chính thức</li>
                 </ul>

@@ -1,4 +1,5 @@
 import { Header } from './components/Header/Header';
+import { EventBannerCarousel } from './components/EventBanner/EventBannerCarousel';
 import { Hero } from './components/Hero/Hero';
 import { ProductsSection } from './components/Products/ProductsSection';
 import { StoresSection } from './components/Stores/StoresSection';
@@ -9,6 +10,7 @@ export default function Home() {
   return (
     <main>
       <Header />
+      <EventBannerCarousel />
       <Hero />
       <ProductsSection />
       <StoresSection />

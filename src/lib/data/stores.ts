@@ -3,7 +3,7 @@ import { Store, ContactInfo } from '@/types/store';
 export const stores: Store[] = [
   {
     id: 1,
-    name: 'VinFast Việt Hùng - Tam Hồng',
+    name: 'VinFast Việt Hùng CS1',
     address: 'Tam Hồng – Yên Lạc – Vĩnh Phúc',
     phone: '086.266.9588',
     email: 'tamhong@vinfast-viethung.vn',
@@ -17,7 +17,7 @@ export const stores: Store[] = [
     },
     googleMapsUrl: 'https://share.google/Xogixc81rWxJ91799',
     status: 'active',
-    workingHours: '8:00 - 20:00 (Thứ 2 - Chủ nhật)',
+    workingHours: '7h30AM - 5h30PM (Thứ 2 - Chủ nhật)',
     services: [
       'Bán xe máy điện VinFast',
       'Bảo hành chính hãng',
@@ -35,7 +35,7 @@ export const stores: Store[] = [
   },
   {
     id: 2,
-    name: 'VinFast Việt Hùng - Hai Bà Trưng',
+    name: 'VinFast Việt Hùng CS2',
     address: '337 Hai Bà Trưng – Tiền Châu – Phúc Yên – Vĩnh Phúc',
     phone: '0961.456.515',
     email: 'haibatrung@vinfast-viethung.vn',
@@ -49,7 +49,7 @@ export const stores: Store[] = [
     },
     googleMapsUrl: 'https://share.google/lhObfMuihhh2ElGGz',
     status: 'active',
-    workingHours: '8:00 - 20:00 (Thứ 2 - Chủ nhật)',
+    workingHours: '7h30AM - 5h30PM (Thứ 2 - Chủ nhật)',
     services: [
       'Bán xe máy điện VinFast',
       'Bảo hành chính hãng',
@@ -67,7 +67,7 @@ export const stores: Store[] = [
   },
   {
     id: 3,
-    name: 'VinFast Việt Hùng - Nam Đồng Mạ',
+    name: 'VinFast Việt Hùng CS3',
     address: 'Khu Nam Đồng Mạ, đường Nguyễn Tất Thành, Thanh Miếu, Việt Trì, Phú Thọ',
     phone: '0829.912.555',
     email: 'namdongma@vinfast-viethung.vn',
@@ -81,7 +81,7 @@ export const stores: Store[] = [
     },
     googleMapsUrl: 'https://share.google/ZSYwdVbMgzZlfklo4',
     status: 'active',
-    workingHours: '8:00 - 20:00 (Thứ 2 - Chủ nhật)',
+    workingHours: '7h30AM - 5h30PM (Thứ 2 - Chủ nhật)',
     services: [
       'Bán xe máy điện VinFast',
       'Bảo hành chính hãng',
@@ -99,7 +99,7 @@ export const stores: Store[] = [
   },
   {
     id: 4,
-    name: 'VinFast Việt Hùng - Hùng Vương',
+    name: 'VinFast Việt Hùng CS4',
     address: '2070 Đại lộ Hùng Vương, P. Nông Trang, TP. Việt Trì, Phú Thọ',
     phone: '036.3822.638',
     email: 'hungvuong@vinfast-viethung.vn',
@@ -113,7 +113,7 @@ export const stores: Store[] = [
     },
     googleMapsUrl: 'https://share.google/07voeuLqcU5SWHKr1',
     status: 'active',
-    workingHours: '8:00 - 20:00 (Thứ 2 - Chủ nhật)',
+    workingHours: '7h30AM - 5h30PM (Thứ 2 - Chủ nhật)',
     services: [
       'Bán xe máy điện VinFast',
       'Bảo hành chính hãng',
@@ -133,11 +133,12 @@ export const stores: Store[] = [
 
 export const contactInfo: ContactInfo = {
   phone: '086.266.9588',
-  email: 'info@vinfast-viethung.vn',
+  email: 'vinfastviethung@gmail.com',
   address: 'VinFast Việt Hùng - Hệ thống đại lý chính hãng tại Vĩnh Phúc và Phú Thọ',
   workingHours: '8:00 - 20:00 (Thứ 2 - Chủ nhật)',
   socialMedia: {
     facebook: 'https://www.facebook.com/profile.php?id=61567009648021',
+    facebook2: 'https://www.facebook.com/vinfastviethung2',
     zalo: 'https://zalo.me/0862669588',
     youtube: 'https://youtube.com/@vinfastviethung'
   }

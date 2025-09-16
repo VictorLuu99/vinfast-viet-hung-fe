@@ -9,10 +9,10 @@ export default function AboutPage() {
       <Header />
       <div className="min-h-screen bg-gray-50 pt-20">
         {/* Hero Section */}
-        <HeroSection
+        {/* <HeroSection
           title="Về VinFast Việt Hùng"
           description="Đại lý chính hãng xe điện VinFast tại Vĩnh Phúc và Phú Thọ"
-        />
+        /> */}
 
         {/* Company Introduction */}
         <div className="container mx-auto px-4 py-16">

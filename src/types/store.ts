@@ -26,6 +26,7 @@ export interface ContactInfo {
   workingHours: string;
   socialMedia?: {
     facebook?: string;
+    facebook2: string;
     zalo?: string;
     youtube?: string;
   };

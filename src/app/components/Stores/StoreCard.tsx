@@ -1,5 +1,5 @@
 import { Store } from '@/types/store';
-import { MapPin, Phone, Mail, Clock, CheckCircle, Star, ExternalLink } from 'lucide-react';
+import { MapPin, Phone, Clock, ExternalLink } from 'lucide-react';
 
 interface StoreCardProps {
   store: Store;
@@ -46,19 +46,6 @@ export const StoreCard = ({ store }: StoreCardProps) => {
           </a>
         </div>
         
-        {store.email && (
-          <div className="flex items-center gap-2 sm:gap-3">
-            <div className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400 flex-shrink-0">
-              <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
-            </div>
-            <a 
-              href={`mailto:${store.email}`}
-              className="text-blue-300 hover:text-blue-200 transition-colors duration-200 text-xs sm:text-sm truncate"
-            >
-              {store.email}
-            </a>
-          </div>
-        )}
         
         {store.workingHours && (
           <div className="flex items-center gap-2 sm:gap-3">
@@ -70,41 +57,7 @@ export const StoreCard = ({ store }: StoreCardProps) => {
         )}
       </div>
 
-      {/* Services */}
-      <div className="mb-4 sm:mb-6">
-        <h4 className="font-semibold text-white mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
-          <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-green-400" />
-          Dịch vụ:
-        </h4>
-        <div className="flex flex-wrap gap-1.5 sm:gap-2">
-          {store.services.slice(0, 3).map((service, index) => (
-            <span 
-              key={index}
-              className="bg-blue-500/20 text-blue-300 text-xs px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border border-blue-400/30 truncate"
-            >
-              {service}
-            </span>
-          ))}
-        </div>
-      </div>
 
-      {/* Features */}
-      <div className="mb-4 sm:mb-6">
-        <h4 className="font-semibold text-white mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
-          <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400" />
-          Đặc điểm:
-        </h4>
-        <div className="flex flex-wrap gap-1.5 sm:gap-2">
-          {store.features.slice(0, 3).map((feature, index) => (
-            <span 
-              key={index}
-              className="bg-green-500/20 text-green-300 text-xs px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border border-green-400/30 truncate"
-            >
-              {feature}
-            </span>
-          ))}
-        </div>
-      </div>
 
       {/* CTA Buttons */}
       <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">

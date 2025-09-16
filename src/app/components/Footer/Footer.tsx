@@ -41,6 +41,17 @@ export const Footer = () => {
                   <FacebookIcon size={20} />
                 </a>
               )}
+              {contactInfo.socialMedia?.facebook2 && (
+                <a 
+                  href={contactInfo.socialMedia.facebook2}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center w-10 h-10 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all duration-300 transform hover:scale-110 hover:shadow-lg"
+                  aria-label="Facebook"
+                >
+                  <FacebookIcon size={20} />
+                </a>
+              )}
               {contactInfo.socialMedia?.zalo && (
                 <a 
                   href={contactInfo.socialMedia.zalo}
@@ -52,7 +63,7 @@ export const Footer = () => {
                   <ZaloIcon size={20} />
                 </a>
               )}
-              {contactInfo.socialMedia?.youtube && (
+              {/* {contactInfo.socialMedia?.youtube && (
                 <a 
                   href={contactInfo.socialMedia.youtube}
                   target="_blank"
@@ -62,7 +73,7 @@ export const Footer = () => {
                 >
                   <YouTubeIcon size={20} />
                 </a>
-              )}
+              )} */}
             </div>
           </div>
 
