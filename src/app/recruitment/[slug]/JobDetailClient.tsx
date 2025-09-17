@@ -126,6 +126,7 @@ export default function JobDetailClient() {
   const handleSubmitApplication = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError(null); // Clear previous errors
 
     try {
       // Create form data for file upload
@@ -154,6 +155,11 @@ export default function JobDetailClient() {
           coverLetter: "",
           resumeFile: null,
         });
+        // Reset file input
+        const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+        if (fileInput) {
+          fileInput.value = '';
+        }
       } else {
         setError(response.error || "Không thể gửi đơn ứng tuyển");
       }

@@ -1,5 +1,5 @@
 // API client for VinFast VietHung frontend
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://vinfast-viethung-api.xox-labs-server.workers.dev';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8787';
 
 export interface ApiResponse<T> {
   success: boolean;
@@ -256,8 +256,8 @@ class ApiClient {
   async submitJobApplication(
     formData: FormData
   ): Promise<ApiResponse<{ application_id: number; message: string }>> {
-    const jobId = formData.get('jobId') as string;
-    return this.request(`/api/recruitment/jobs/${jobId}/apply`, {
+    const jobSlug = formData.get('jobSlug') as string;
+    return this.request(`/api/recruitment/jobs/by-slug/${jobSlug}/apply`, {
       method: 'POST',
       body: formData,
       headers: {}, // Let browser set Content-Type for FormData
