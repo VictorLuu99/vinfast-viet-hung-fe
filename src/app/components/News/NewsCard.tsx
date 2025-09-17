@@ -13,6 +13,23 @@ export const NewsCard = ({ article }: NewsCardProps) => {
     return vietnameseNewsCategories.find(cat => cat.value === slug)?.label || slug;
   };
 
+  // Function to strip HTML tags and get plain text for excerpt
+  const stripHtmlTags = (html: string) => {
+    return html.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').trim();
+  };
+
+  // Get excerpt text - prefer excerpt field, fallback to content
+  const getExcerptText = () => {
+    if (article.excerpt) {
+      return stripHtmlTags(article.excerpt);
+    }
+    if (article.content) {
+      const plainText = stripHtmlTags(article.content);
+      return plainText.length > 160 ? plainText.substring(0, 160) + '...' : plainText;
+    }
+    return '';
+  };
+
   return (
     <article className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
       {/* Featured Image */}
@@ -56,9 +73,9 @@ export const NewsCard = ({ article }: NewsCardProps) => {
         </h3>
 
         {/* Excerpt */}
-        {article.excerpt && (
+        {getExcerptText() && (
           <p className="text-gray-600 mb-4 line-clamp-3">
-            {article.excerpt}
+            {getExcerptText()}
           </p>
         )}
 

@@ -257,7 +257,7 @@ export default function NewsArticleClient() {
               {/* Article Content */}
               <div className="prose prose-lg max-w-none mb-12">
                 <div
-                  className="text-gray-800 leading-relaxed"
+                  className="rich-content text-gray-800 leading-relaxed"
                   dangerouslySetInnerHTML={{ __html: article.content }}
                 />
               </div>
