@@ -57,6 +57,9 @@ export interface Product {
     waterResistance?: string;
   };
   colorVariants?: Record<string, string>;
+  original_price?: number;
+  price_formatted: string;
+  original_price_formatted?: string;
 }
 
 export interface ProductCategory {

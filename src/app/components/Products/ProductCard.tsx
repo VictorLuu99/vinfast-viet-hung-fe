@@ -18,7 +18,17 @@ const isApiProduct = (product: ApiProduct | LocalProduct): product is ApiProduct
 // Helper functions to get values from either product type
 const getProductImage = (product: ApiProduct | LocalProduct): string => {
   if (isApiProduct(product)) {
-    return product.color_variants[product.default_color || Object.keys(product.color_variants)[0]]?.[0] || '/images/placeholder-product.jpg';
+    const variants: Record<string, string[]> =
+      typeof (product.color_variants as any) === 'string'
+        ? JSON.parse(product.color_variants as unknown as string)
+        : (product.color_variants as Record<string, string[]>);
+
+    const keys = Object.keys(variants);
+    const colorKey = product.default_color && variants[product.default_color]
+      ? product.default_color
+      : keys[0];
+
+    return (colorKey ? variants[colorKey]?.[0] : undefined) || '/images/placeholder-product.jpg';
   } else {
     return product.image || '/images/placeholder-product.jpg';
   }
@@ -88,13 +98,13 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         )}
         
         {/* Discount Badge */}
-        {/* {product.discount && (
+        {product.discount && (
           <div className="absolute top-2 sm:top-4 right-2 sm:right-4">
             <span className="bg-red-500 text-white px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs font-semibold shadow-lg">
               -{product.discount}%
             </span>
           </div>
-        )} */}
+        )}
         
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
@@ -117,10 +127,10 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             {product.name}
           </h3>
           
-          {/* <div className="flex items-center gap-2 mb-1">
-            {product.originalPrice && product.originalPriceFormatted && (
+          <div className="flex items-center gap-2 mb-1">
+            {product?.original_price && product.original_price_formatted&& (
               <div className="text-sm sm:text-base text-gray-400 line-through">
-                {product.originalPriceFormatted}
+                {product.original_price_formatted}
               </div>
             )}
             {product.discount && (
@@ -128,7 +138,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
                 (-{product.discount}%)
               </div>
             )}
-          </div> */}
+          </div>
           
           <div className="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
             {getFormattedPrice(product)}
