@@ -289,7 +289,7 @@ export default function JobDetailClient() {
                       Mô tả công việc
                     </h2>
                     <div
-                      className="text-gray-800 leading-relaxed"
+                      className="rich-content text-gray-800 leading-relaxed"
                       dangerouslySetInnerHTML={{ __html: job.description }}
                     />
                   </div>
@@ -301,7 +301,7 @@ export default function JobDetailClient() {
                         Yêu cầu ứng viên
                       </h2>
                       <div
-                        className="text-gray-800 leading-relaxed"
+                        className="rich-content text-gray-800 leading-relaxed"
                         dangerouslySetInnerHTML={{ __html: job.requirements }}
                       />
                     </div>
@@ -314,7 +314,7 @@ export default function JobDetailClient() {
                         Quyền lợi
                       </h2>
                       <div
-                        className="text-gray-800 leading-relaxed"
+                        className="rich-content text-gray-800 leading-relaxed"
                         dangerouslySetInnerHTML={{ __html: job.benefits }}
                       />
                     </div>
