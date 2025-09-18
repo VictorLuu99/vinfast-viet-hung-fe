@@ -135,7 +135,7 @@ export const contactInfo: ContactInfo = {
   phone: '086.266.9588',
   email: 'vinfastviethung@gmail.com',
   address: 'VinFast Việt Hùng - Hệ thống đại lý chính hãng tại Vĩnh Phúc và Phú Thọ',
-  workingHours: '8:00 - 20:00 (Thứ 2 - Chủ nhật)',
+  workingHours: '07:30 - 17:30 (Thứ 2 - Chủ nhật)',
   socialMedia: {
     facebook: 'https://www.facebook.com/profile.php?id=61567009648021',
     facebook2: 'https://www.facebook.com/vinfastviethung2',
