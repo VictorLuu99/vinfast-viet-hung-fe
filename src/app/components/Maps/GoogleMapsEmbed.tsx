@@ -1,17 +1,21 @@
 "use client";
 
 import { stores } from '@/lib/data/stores';
-import { MapPin, Phone, ExternalLink } from 'lucide-react';
+import { MapPin, Phone, ExternalLink, ZoomIn, ZoomOut, Maximize2 } from 'lucide-react';
 import { useState } from 'react';
 
 interface MapSectionProps {
   store: typeof stores[0];
   embedUrl: string;
+  isExpanded?: boolean;
+  onExpand?: () => void;
+  onZoomChange?: (zoom: number) => void;
 }
 
-const MapSection = ({ store, embedUrl }: MapSectionProps) => {
+const MapSection = ({ store, embedUrl, isExpanded, onExpand, onZoomChange }: MapSectionProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+  const [currentZoom, setCurrentZoom] = useState(15);
 
   const handleIframeLoad = () => {
     setIsLoading(false);
@@ -22,8 +26,24 @@ const MapSection = ({ store, embedUrl }: MapSectionProps) => {
     setHasError(true);
   };
 
+  const handleZoomIn = () => {
+    const newZoom = Math.min(currentZoom + 1, 20);
+    setCurrentZoom(newZoom);
+    onZoomChange?.(newZoom);
+  };
+
+  const handleZoomOut = () => {
+    const newZoom = Math.max(currentZoom - 1, 8);
+    setCurrentZoom(newZoom);
+    onZoomChange?.(newZoom);
+  };
+
+  const handleExpand = () => {
+    onExpand?.();
+  };
+
   return (
-    <div className="relative bg-white rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition-shadow duration-300">
+    <div className={`relative bg-white rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300 ${isExpanded ? 'fixed inset-4 z-50 md:inset-8' : ''}`}>
       {/* Loading State */}
       {isLoading && (
         <div className="absolute inset-0 bg-gray-100 flex items-center justify-center z-10">
@@ -52,8 +72,33 @@ const MapSection = ({ store, embedUrl }: MapSectionProps) => {
         </div>
       )}
 
+      {/* Zoom Controls */}
+      <div className="absolute top-4 left-4 z-20 flex flex-col gap-2">
+        <button
+          onClick={handleZoomIn}
+          className="bg-white/90 backdrop-blur-sm p-2 rounded-lg shadow-lg hover:bg-white transition-all duration-200 group-hover:scale-110"
+          title="Phòng to"
+        >
+          <ZoomIn className="w-4 h-4 text-gray-700" />
+        </button>
+        <button
+          onClick={handleZoomOut}
+          className="bg-white/90 backdrop-blur-sm p-2 rounded-lg shadow-lg hover:bg-white transition-all duration-200 group-hover:scale-110"
+          title="Thu nhỏ"
+        >
+          <ZoomOut className="w-4 h-4 text-gray-700" />
+        </button>
+        <button
+          onClick={handleExpand}
+          className="bg-white/90 backdrop-blur-sm p-2 rounded-lg shadow-lg hover:bg-white transition-all duration-200 group-hover:scale-110"
+          title="Xem toàn màn hình"
+        >
+          <Maximize2 className="w-4 h-4 text-gray-700" />
+        </button>
+      </div>
+
       {/* Map Iframe */}
-      <div className="relative aspect-[4/3]">
+      <div className={`relative ${isExpanded ? 'h-full' : 'aspect-[4/3]'}`}>
         <iframe
           src={embedUrl}
           width="100%"
@@ -104,8 +149,11 @@ const MapSection = ({ store, embedUrl }: MapSectionProps) => {
 };
 
 export const GoogleMapsEmbed = () => {
+  const [expandedMap, setExpandedMap] = useState<number | null>(null);
+  const [mapZooms, setMapZooms] = useState<Record<number, number>>({});
+
   // Convert coordinates to Google Maps embed URL
-  const getEmbedUrl = (store: typeof stores[0]) => {
+  const getEmbedUrl = (store: typeof stores[0], zoom: number = 15) => {
     const coordinates = store.location.coordinates;
 
     if (!coordinates) {
@@ -117,61 +165,87 @@ export const GoogleMapsEmbed = () => {
 
     // Use a simple approach that works reliably with coordinates
     // This creates a proper Google Maps embed showing the location
-    const fallbackUrl = `https://maps.google.com/maps?q=${lat},${lng}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+    const fallbackUrl = `https://maps.google.com/maps?q=${lat},${lng}&t=&z=${zoom}&ie=UTF8&iwloc=&output=embed`;
 
     return fallbackUrl;
   };
 
+  const handleExpand = (storeId: number) => {
+    setExpandedMap(expandedMap === storeId ? null : storeId);
+  };
+
+  const handleZoomChange = (storeId: number, zoom: number) => {
+    setMapZooms(prev => ({ ...prev, [storeId]: zoom }));
+  };
+
+  // Close expanded view when clicking outside or pressing escape
+  const handleCloseExpanded = () => {
+    setExpandedMap(null);
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6">
-      <div className="mb-6">
-        <h3 className="text-xl font-bold text-gray-900 mb-2">
-          Vị trí 4 cơ sở VinFast Việt Hùng
-        </h3>
-        <p className="text-gray-600 text-sm">
-          Tại Vĩnh Phúc và Phú Thọ - Click vào bản đồ để xem chi tiết
-        </p>
-      </div>
+    <>
+      {/* Backdrop for expanded view */}
+      {expandedMap !== null && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40"
+          onClick={handleCloseExpanded}
+        />
+      )}
 
-      {/* Maps Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {stores.map((store) => (
-          <MapSection
-            key={store.id}
-            store={store}
-            embedUrl={getEmbedUrl(store)}
-          />
-        ))}
-      </div>
+      <div className="bg-white rounded-lg shadow-lg p-6">
+        <div className="mb-6">
+          <h3 className="text-xl font-bold text-gray-900 mb-2">
+            Vị trí 4 cơ sở VinFast Việt Hùng
+          </h3>
+          <p className="text-gray-600 text-sm">
+            Tại Vĩnh Phúc và Phú Thọ - Click vào bản đồ để xem chi tiết
+          </p>
+        </div>
 
-      {/* Bottom Info */}
-      <div className="mt-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border border-blue-100">
-        <div className="flex items-center gap-2 mb-2">
-          <MapPin className="w-5 h-5 text-blue-600" />
-          <h4 className="font-semibold text-gray-900">Thông tin liên hệ</h4>
+        {/* Maps Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {stores.map((store) => (
+            <MapSection
+              key={store.id}
+              store={store}
+              embedUrl={getEmbedUrl(store, mapZooms[store.id] || 15)}
+              isExpanded={expandedMap === store.id}
+              onExpand={() => handleExpand(store.id)}
+              onZoomChange={(zoom) => handleZoomChange(store.id, zoom)}
+            />
+          ))}
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-          <div>
-            <p className="text-gray-600 mb-1">
-              <strong>Vĩnh Phúc:</strong> 2 cơ sở (Yên Lạc, Phúc Yên)
-            </p>
-            <p className="text-gray-600">
-              <strong>Phú Thọ:</strong> 2 cơ sở (Việt Trì)
-            </p>
+
+        {/* Bottom Info */}
+        <div className="mt-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border border-blue-100">
+          <div className="flex items-center gap-2 mb-2">
+            <MapPin className="w-5 h-5 text-blue-600" />
+            <h4 className="font-semibold text-gray-900">Thông tin liên hệ</h4>
           </div>
-          <div>
-            <p className="text-gray-600 mb-1">
-              <strong>Giờ làm việc:</strong> 7:30 - 17:30
-            </p>
-            <p className="text-gray-600">
-              <strong>Hotline:</strong>
-              <a href="tel:0862669588" className="text-blue-600 hover:text-blue-700 ml-1">
-                086.266.9588
-              </a>
-            </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+            <div>
+              <p className="text-gray-600 mb-1">
+                <strong>Vĩnh Phúc:</strong> 2 cơ sở (Yên Lạc, Phúc Yên)
+              </p>
+              <p className="text-gray-600">
+                <strong>Phú Thọ:</strong> 2 cơ sở (Việt Trì)
+              </p>
+            </div>
+            <div>
+              <p className="text-gray-600 mb-1">
+                <strong>Giờ làm việc:</strong> 7:30 - 17:30
+              </p>
+              <p className="text-gray-600">
+                <strong>Hotline:</strong>
+                <a href="tel:0862669588" className="text-blue-600 hover:text-blue-700 ml-1">
+                  086.266.9588
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };

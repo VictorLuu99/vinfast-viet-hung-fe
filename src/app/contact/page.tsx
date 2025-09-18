@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import { Header } from '../components/Header/Header';
 import { Footer } from '../components/Footer/Footer';
-import { HeroSection } from '../components/shared/HeroSection';
 import { ContactSection } from '../components/Contact/ContactSection';
 import { ContactForm } from '../components/Contact/ContactForm';
+import { EmergencyContactSection } from '../components/Contact/EmergencyContactSection';
 import { StoresSection } from '../components/Stores/StoresSection';
-import { GoogleMapsEmbed } from '../components/Maps/GoogleMapsEmbed';
+import { MapSection } from '../components/Maps/MapSection';
 
 export const metadata: Metadata = {
   title: 'Liên hệ - VinFast Việt Hùng | Đại lý xe điện VinFast',
@@ -45,11 +45,8 @@ export default function ContactPage() {
               <ContactForm />
             </div>
 
-            {/* Map & Additional Info */}
+            {/* Additional Info */}
             <div className="space-y-8">
-              {/* Google Maps Embed */}
-              <GoogleMapsEmbed />
-
               {/* Why Choose Us */}
               <div className="bg-white rounded-lg shadow-lg p-6">
                 <h3 className="text-xl font-bold text-gray-900 mb-4">
@@ -98,23 +95,12 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Emergency Contact */}
-              {/* <div className="bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg p-6">
-                <h3 className="text-lg font-bold mb-2">🚨 Hỗ trợ khẩn cấp</h3>
-                <p className="mb-4 opacity-90">
-                  Gặp sự cố cần hỗ trợ gấp? Liên hệ ngay:
-                </p>
-                <a
-                  href="tel:02838649999"
-                  className="inline-flex items-center bg-white text-red-600 px-4 py-2 rounded-lg font-semibold hover:bg-red-50 transition-colors"
-                >
-                  📞 028 3864 9999
-                </a>
-              </div> */}
             </div>
           </div>
         </div>
       </section>
+      {/* Interactive Maps Section */}
+      <MapSection />
 
       {/* Store Locations */}
       <StoresSection />
