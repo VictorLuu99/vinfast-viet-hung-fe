@@ -1,0 +1,1 @@
+export { GoogleMapsEmbed } from './GoogleMapsEmbed';

@@ -5,6 +5,7 @@ import { HeroSection } from '../components/shared/HeroSection';
 import { ContactSection } from '../components/Contact/ContactSection';
 import { ContactForm } from '../components/Contact/ContactForm';
 import { StoresSection } from '../components/Stores/StoresSection';
+import { GoogleMapsEmbed } from '../components/Maps/GoogleMapsEmbed';
 
 export const metadata: Metadata = {
   title: 'Liên hệ - VinFast Việt Hùng | Đại lý xe điện VinFast',
@@ -46,21 +47,8 @@ export default function ContactPage() {
 
             {/* Map & Additional Info */}
             <div className="space-y-8">
-              {/* Map Placeholder */}
-              <div className="bg-white rounded-lg shadow-lg p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">
-                  Vị trí cửa hàng
-                </h3>
-                <div className="aspect-video bg-gray-200 rounded-lg flex items-center justify-center">
-                  <div className="text-center text-gray-500">
-                    <div className="text-4xl mb-2">🗺️</div>
-                    <p>Bản đồ 4 cơ sở VinFast Việt Hùng</p>
-                    <p className="text-sm mt-1">
-                      Vĩnh Phúc và Phú Thọ
-                    </p>
-                  </div>
-                </div>
-              </div>
+              {/* Google Maps Embed */}
+              <GoogleMapsEmbed />
 
               {/* Why Choose Us */}
               <div className="bg-white rounded-lg shadow-lg p-6">
