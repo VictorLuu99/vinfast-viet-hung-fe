@@ -19,21 +19,12 @@ const isApiProduct = (
 
 // Helper functions to get values from either product type
 const getProductImage = (product: ApiProduct): string => {
-  const variants: Record<string, string[]> =
-    typeof (product.color_variants as any) === "string"
-      ? JSON.parse(product.color_variants as unknown as string)
-      : (product.color_variants as Record<string, string[]>);
-
-  const keys = Object.keys(variants);
-  const colorKey =
-    product.default_color && variants[product.default_color]
-      ? product.default_color
-      : keys[0];
-
-  return (
-    (colorKey ? variants[colorKey]?.[0] : undefined) ||
-    "/images/placeholder-product.jpg"
-  );
+  console.log("product: ", product);
+  if ( typeof (product.color_variants as any) === "string") {
+    const variants =  JSON.parse(product.color_variants as unknown as string)
+    return variants[product.default_color || Object.keys(variants)[0]]?.[0] || '/images/placeholder-product.jpg';
+  } 
+  return product.color_variants[product.default_color || Object.keys(product.color_variants)[0]]?.[0] || '/images/placeholder-product.jpg';
 };
 
 const getProductSlug = (product: ApiProduct | LocalProduct): string => {
