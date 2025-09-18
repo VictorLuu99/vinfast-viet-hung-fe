@@ -99,7 +99,7 @@ export default function ContactPage() {
               </div>
 
               {/* Emergency Contact */}
-              <div className="bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg p-6">
+              {/* <div className="bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg p-6">
                 <h3 className="text-lg font-bold mb-2">🚨 Hỗ trợ khẩn cấp</h3>
                 <p className="mb-4 opacity-90">
                   Gặp sự cố cần hỗ trợ gấp? Liên hệ ngay:
@@ -110,7 +110,7 @@ export default function ContactPage() {
                 >
                   📞 028 3864 9999
                 </a>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
