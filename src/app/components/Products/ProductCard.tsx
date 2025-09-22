@@ -19,7 +19,6 @@ const isApiProduct = (
 
 // Helper functions to get values from either product type
 const getProductImage = (product: ApiProduct): string => {
-  console.log("product: ", product);
   if ( typeof (product.color_variants as any) === "string") {
     const variants =  JSON.parse(product.color_variants as unknown as string)
     return variants[product.default_color || Object.keys(variants)[0]]?.[0] || '/images/placeholder-product.jpg';

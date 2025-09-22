@@ -1,7 +1,7 @@
 export interface Product {
   id: string;
   name: string;
-  category: 'cao-cap' | 'trung-cap' | 'pho-thong';
+  category: 'cao-cap' | 'trung-cp' | 'trung-cap' | 'pho-thong';
   price: number;
   originalPrice?: number;
   priceFormatted: string;
@@ -9,7 +9,6 @@ export interface Product {
   discount?: number;
   specs: string;
   features: string[];
-  image: string;
   gallery?: string[];
   badge?: string;
   range: number; // km
@@ -65,6 +64,7 @@ export interface Product {
 export interface ProductCategory {
   id: string;
   name: string;
+  slug: string;
   displayName: string;
   count: number;
   description: string;

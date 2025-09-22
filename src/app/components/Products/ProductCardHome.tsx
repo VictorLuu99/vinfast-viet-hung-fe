@@ -6,7 +6,7 @@ import { contactInfo } from '@/lib/data/stores';
 import { Zap, Battery, MapPin, Shield } from 'lucide-react';
 
 interface ProductCardProps {
-  product: ApiProduct | LocalProduct;
+  product: ApiProduct;
   viewMode?: 'grid' | 'list';
 }
 
@@ -16,12 +16,12 @@ const isApiProduct = (product: ApiProduct | LocalProduct): product is ApiProduct
 };
 
 // Helper functions to get values from either product type
-const getProductImage = (product: ApiProduct | LocalProduct): string => {
-  if (isApiProduct(product)) {
-    return product.color_variants[product.default_color || Object.keys(product.color_variants)[0]]?.[0] || '/images/placeholder-product.jpg';
-  } else {
-    return product.image || '/images/placeholder-product.jpg';
-  }
+const getProductImage = (product: ApiProduct): string => {
+  if ( typeof (product.color_variants as any) === "string") {
+    const variants =  JSON.parse(product.color_variants as unknown as string)
+    return variants[product.default_color || Object.keys(variants)[0]]?.[0] || '/images/placeholder-product.jpg';
+  } 
+  return product.color_variants[product.default_color || Object.keys(product.color_variants)[0]]?.[0] || '/images/placeholder-product.jpg';
 };
 
 const getProductSlug = (product: ApiProduct | LocalProduct): string => {

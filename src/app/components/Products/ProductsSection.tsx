@@ -1,18 +1,100 @@
 'use client';
 
-import { useState } from 'react';
-import { products, productCategories } from '@/lib/data/products';
+import { useState, useEffect } from 'react';
 import { contactInfo } from '@/lib/data/stores';
 import { ProductCardHome } from './ProductCardHome';
 import { CategoryFilter } from './CategoryFilter';
-import { Sparkles, Zap, Star, MessageCircle } from 'lucide-react';
+import { Sparkles, Zap, Star, MessageCircle, Loader2 } from 'lucide-react';
+import { apiClient, Product } from '@/lib/api';
+import {ProductCategory } from '@/types/product';
 
 export const ProductsSection = () => {
   const [activeCategory, setActiveCategory] = useState('all');
+  const [products, setProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<ProductCategory[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const filteredProducts = activeCategory === 'all' 
-    ? products 
+  // Fetch products and categories from API
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        // Fetch products and categories in parallel
+        const [productsResponse, categoriesResponse] = await Promise.all([
+          apiClient.getProducts({
+            limit: 50, // Get more products to ensure we have all 13
+            category: activeCategory !== 'all' ? activeCategory : undefined
+          }),
+          apiClient.getProductCategories()
+        ]);
+
+        if (productsResponse.success && productsResponse.data) {
+          // Transform API data to match local Product interface
+          setProducts(productsResponse.data);
+        }
+
+        if (categoriesResponse.success && categoriesResponse.data) {
+          // Add "all" category and map display names
+          const allCategories: ProductCategory[] = [
+            {
+              id: 'all',
+              name: 'all',
+              slug: 'all',
+              displayName: 'Tất cả',
+              count: 0, // Will be calculated later
+              description: 'Tất cả các dòng xe máy điện VinFast'
+            },
+            ...categoriesResponse.data.map((cat: any) => ({
+              id: cat.slug || cat.name,
+              name: cat.slug || cat.name,
+              slug: cat.slug,
+              displayName: cat.display_name || cat.name,
+              count: 0, // Will be calculated later
+              description: cat.description || ''
+            }))
+          ];
+          setCategories(allCategories);
+        }
+
+      } catch (err) {
+        console.error('Failed to fetch products:', err);
+        setError('Không thể tải danh sách sản phẩm. Vui lòng thử lại sau.');
+
+        // Fallback to empty state - could import static data here if needed
+        setProducts([]);
+        setCategories([
+          {
+            id: 'all',
+            name: 'all',
+            slug: 'all',
+            displayName: 'Tất cả',
+            count: 0,
+            description: 'Tất cả các dòng xe máy điện VinFast'
+          }
+        ]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // Filter products based on active category
+  const filteredProducts = activeCategory === 'all'
+    ? products
     : products.filter(product => product.category === activeCategory);
+
+  // Calculate category counts
+  const categoryCounts = categories.map(category => {
+    const count = category.name === 'all'
+      ? products.length
+      : products.filter(p => p.category === category.name).length;
+    return { ...category, count };
+  });
 
   return (
     <section id="products" className="py-16 sm:py-20 md:py-24 lg:py-28 xl:py-32 bg-gradient-to-br from-gray-50 via-white to-blue-50">
@@ -33,7 +115,7 @@ export const ProductsSection = () => {
           </h2>
           
           <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 sm:mb-8 max-w-2xl md:max-w-3xl mx-auto leading-relaxed">
-            13 mẫu xe đầy đủ 3 phân khúc với công nghệ tiên tiến, thiết kế hiện đại và 
+            {products.length} mẫu xe đầy đủ 3 phân khúc với công nghệ tiên tiến, thiết kế hiện đại và 
             hiệu suất vượt trội. Trải nghiệm sự tiện nghi và bảo vệ môi trường.
           </p>
           
@@ -43,38 +125,93 @@ export const ProductsSection = () => {
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3">
                 <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" />
               </div>
-              <div className="text-xl sm:text-2xl font-bold text-gray-900">3</div>
+              <div className="text-xl sm:text-2xl font-bold text-gray-900">
+                {categoryCounts.find(c => c.slug === 'cao-cap')?.count || 0}
+              </div>
               <div className="text-xs sm:text-sm text-gray-600">Cao cấp</div>
             </div>
             <div className="text-center">
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3">
                 <Star className="w-6 h-6 sm:w-8 sm:h-8 text-purple-600" />
               </div>
-              <div className="text-xl sm:text-2xl font-bold text-gray-900">4</div>
+              <div className="text-xl sm:text-2xl font-bold text-gray-900">
+                {categoryCounts.find(c => c.slug === 'trung-cp' || c.slug === 'trung-cap')?.count || 0}
+              </div>
               <div className="text-xs sm:text-sm text-gray-600">Trung cấp</div>
             </div>
             <div className="text-center">
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3">
                 <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-green-600" />
               </div>
-              <div className="text-xl sm:text-2xl font-bold text-gray-900">6</div>
+              <div className="text-xl sm:text-2xl font-bold text-gray-900">
+                {categoryCounts.find(c => c.slug === 'pho-thong')?.count || 0}
+              </div>
               <div className="text-xs sm:text-sm text-gray-600">Phổ thông</div>
             </div>
           </div>
-          
+
           {/* Category Filter */}
-          <CategoryFilter 
-            categories={productCategories}
-            activeCategory={activeCategory}
-            onCategoryChange={setActiveCategory}
-          />
+          {!loading && (
+            <CategoryFilter
+              categories={categoryCounts.map(cat => ({
+                id: cat.name,
+                name: cat.name,
+                slug: cat.slug,
+                displayName: cat.displayName,
+                count: cat.count,
+                description: cat.description || ''
+              }))}
+              activeCategory={activeCategory}
+              onCategoryChange={setActiveCategory}
+            />
+          )}
         </div>
 
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
-          {filteredProducts.map((product) => (
-            <ProductCardHome key={product.id} product={product} />
-          ))}
+          {loading ? (
+            // Loading skeleton
+            Array.from({ length: 12 }).map((_, index) => (
+              <div key={index} className="bg-white rounded-2xl shadow-lg p-6 animate-pulse">
+                <div className="w-full h-48 bg-gray-200 rounded-xl mb-4"></div>
+                <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
+                <div className="h-6 bg-gray-200 rounded w-1/2"></div>
+              </div>
+            ))
+          ) : error ? (
+            // Error state
+            <div className="col-span-full flex flex-col items-center justify-center py-16 text-center">
+              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
+                <Star className="w-8 h-8 text-red-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Có lỗi xảy ra</h3>
+              <p className="text-gray-600 mb-6 max-w-md">{error}</p>
+              <button
+                onClick={() => window.location.reload()}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors"
+              >
+                <Loader2 className="w-4 h-4" />
+                Thử lại
+              </button>
+            </div>
+          ) : filteredProducts.length === 0 ? (
+            // Empty state
+            <div className="col-span-full flex flex-col items-center justify-center py-16 text-center">
+              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                <Sparkles className="w-8 h-8 text-gray-400" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Không tìm thấy sản phẩm</h3>
+              <p className="text-gray-600 max-w-md">
+                Hiện tại không có sản phẩm nào trong danh mục này. Vui lòng thử lại sau hoặc chọn danh mục khác.
+              </p>
+            </div>
+          ) : (
+            // Products
+            filteredProducts.map((product) => (
+              <ProductCardHome key={product.id} product={product} />
+            ))
+          )}
         </div>
 
         {/* Bottom CTA */}
