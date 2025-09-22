@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Lexend_Deca } from 'next/font/google'
 import './globals.css'
+import ContactBar from './components/shared/ContactBar'
 
 const lexendDeca = Lexend_Deca({
   subsets: ['latin'],
@@ -29,6 +30,7 @@ export default function RootLayout({
     <html lang="vi" className={lexendDeca.variable}>
       <body className="font-sans">
         {children}
+        <ContactBar />
       </body>
     </html>
   )
