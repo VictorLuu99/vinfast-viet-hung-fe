@@ -11,11 +11,12 @@ export const stores: Store[] = [
       city: 'Yên Lạc',
       province: 'Vĩnh Phúc',
       coordinates: {
-        lat: 21.3087,
-        lng: 105.6049
+        lat: 21.2312736,
+        lng: 105.5657291
       }
     },
-    googleMapsUrl: 'https://share.google/Xogixc81rWxJ91799',
+    googleMapsUrl: 'https://maps.app.goo.gl/xCp9CMXB5haUAigZA',
+    embedGGMapsUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2932.8599637448397!2d105.56518551571821!3d21.229495149039153!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3134f1e1a79727a7%3A0x3dd7b45e652248e4!2zVmluRmFzdCBWaeG7h3QgSMO5bmc!5e0!3m2!1svi!2s!4v1758529170403!5m2!1svi!2s",
     status: 'active',
     workingHours: '7h30AM - 5h30PM (Thứ 2 - Chủ nhật)',
     services: [
@@ -43,11 +44,12 @@ export const stores: Store[] = [
       city: 'Phúc Yên',
       province: 'Vĩnh Phúc',
       coordinates: {
-        lat: 21.2333,
-        lng: 105.7000
+        lat: 20.9950092,
+        lng: 105.8694013
       }
     },
-    googleMapsUrl: 'https://share.google/lhObfMuihhh2ElGGz',
+    googleMapsUrl: 'https://maps.app.goo.gl/PTjdi9y5t3wFzA1FA',
+    embedGGMapsUrl: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7438.090493246148!2d105.6940871!3d21.2300543!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3134fd61d6302ffd%3A0x4f940142672755f0!2zVmluRmFzdCBWaeG7h3QgSMO5bmcgMg!5e0!3m2!1svi!2s!4v1758529321737!5m2!1svi!2s",
     status: 'active',
     workingHours: '7h30AM - 5h30PM (Thứ 2 - Chủ nhật)',
     services: [
@@ -75,11 +77,12 @@ export const stores: Store[] = [
       city: 'Việt Trì',
       province: 'Phú Thọ',
       coordinates: {
-        lat: 21.3011,
-        lng: 105.4300
+        lat: 21.3109412,
+        lng: 105.4157617
       }
     },
-    googleMapsUrl: 'https://share.google/ZSYwdVbMgzZlfklo4',
+    googleMapsUrl: 'https://maps.app.goo.gl/Z8YTF4dmgkKDdK4r6',
+    embedGGMapsUrl: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d29736.01521158436!2d105.4157617!3d21.3109412!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6928029c5d071bf3%3A0x3d7a6a48da43f210!2zWEUgTcOBWSDEkEnhu4ZOIFZJTkZBU1QgVknhu4ZUIEjDmU5HIFBIw5ogVEjhu4w!5e0!3m2!1svi!2s!4v1758529355878!5m2!1svi!2s",
     status: 'active',
     workingHours: '7h30AM - 5h30PM (Thứ 2 - Chủ nhật)',
     services: [
@@ -107,11 +110,12 @@ export const stores: Store[] = [
       city: 'Việt Trì',
       province: 'Phú Thọ',
       coordinates: {
-        lat: 21.4000,
-        lng: 105.4333
+        lat: 21.3332758,
+        lng: 105.3749727
       }
     },
-    googleMapsUrl: 'https://share.google/07voeuLqcU5SWHKr1',
+    googleMapsUrl: 'https://maps.app.goo.gl/9jmjFAV3YaunYvnx5',
+    embedGGMapsUrl: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d232.27727405505163!2d105.3749727!3d21.3332758!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3134930b71adfe93%3A0x2d571a17e214fa4a!2zWGUgbcOheSDEkWnhu4duIFZpbkZhc3QgVmnhu4d0IFRyw6wgUGjDuiBUaOG7jQ!5e0!3m2!1svi!2s!4v1758529392516!5m2!1svi!2s",
     status: 'active',
     workingHours: '7h30AM - 5h30PM (Thứ 2 - Chủ nhật)',
     services: [

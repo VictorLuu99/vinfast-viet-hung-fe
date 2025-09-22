@@ -13,6 +13,7 @@ export interface Store {
     };
   };
   googleMapsUrl?: string;
+  embedGGMapsUrl: string;
   status: 'active' | 'inactive';
   workingHours?: string;
   services: string[];

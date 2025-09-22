@@ -72,31 +72,6 @@ const MapSection = ({ store, embedUrl, isExpanded, onExpand, onZoomChange }: Map
         </div>
       )}
 
-      {/* Zoom Controls */}
-      <div className="absolute top-4 left-4 z-20 flex flex-col gap-2">
-        <button
-          onClick={handleZoomIn}
-          className="bg-white/90 backdrop-blur-sm p-2 rounded-lg shadow-lg hover:bg-white transition-all duration-200 group-hover:scale-110"
-          title="Phòng to"
-        >
-          <ZoomIn className="w-4 h-4 text-gray-700" />
-        </button>
-        <button
-          onClick={handleZoomOut}
-          className="bg-white/90 backdrop-blur-sm p-2 rounded-lg shadow-lg hover:bg-white transition-all duration-200 group-hover:scale-110"
-          title="Thu nhỏ"
-        >
-          <ZoomOut className="w-4 h-4 text-gray-700" />
-        </button>
-        <button
-          onClick={handleExpand}
-          className="bg-white/90 backdrop-blur-sm p-2 rounded-lg shadow-lg hover:bg-white transition-all duration-200 group-hover:scale-110"
-          title="Xem toàn màn hình"
-        >
-          <Maximize2 className="w-4 h-4 text-gray-700" />
-        </button>
-      </div>
-
       {/* Map Iframe */}
       <div className={`relative ${isExpanded ? 'h-full' : 'aspect-[4/3]'}`}>
         <iframe
@@ -152,24 +127,6 @@ export const GoogleMapsEmbed = () => {
   const [expandedMap, setExpandedMap] = useState<number | null>(null);
   const [mapZooms, setMapZooms] = useState<Record<number, number>>({});
 
-  // Convert coordinates to Google Maps embed URL
-  const getEmbedUrl = (store: typeof stores[0], zoom: number = 15) => {
-    const coordinates = store.location.coordinates;
-
-    if (!coordinates) {
-      // Fallback to search by address if coordinates are not available
-      return `https://maps.google.com/maps?q=${encodeURIComponent(store.address)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
-    }
-
-    const { lat, lng } = coordinates;
-
-    // Use a simple approach that works reliably with coordinates
-    // This creates a proper Google Maps embed showing the location
-    const fallbackUrl = `https://maps.google.com/maps?q=${lat},${lng}&t=&z=${zoom}&ie=UTF8&iwloc=&output=embed`;
-
-    return fallbackUrl;
-  };
-
   const handleExpand = (storeId: number) => {
     setExpandedMap(expandedMap === storeId ? null : storeId);
   };
@@ -209,7 +166,7 @@ export const GoogleMapsEmbed = () => {
             <MapSection
               key={store.id}
               store={store}
-              embedUrl={getEmbedUrl(store, mapZooms[store.id] || 15)}
+              embedUrl={store.embedGGMapsUrl}
               isExpanded={expandedMap === store.id}
               onExpand={() => handleExpand(store.id)}
               onZoomChange={(zoom) => handleZoomChange(store.id, zoom)}
